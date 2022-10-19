@@ -1,0 +1,97 @@
+
+.imageView{
+ -fx-visibility:visibile;
+}
+/*To remove the borders write:*/
+ .tab{
+  -fx-background-color: #5d5e5e;
+  -fx-border:none;
+  -fx-text-fill:#c9caca;
+  -fx-width:1000px;
+  -fx-height:800px;
+  -fx-background-insets: 0 1 0 0,1 2 0 1,2 3 0 2;
+}
+ .tab:selected  {
+  -fx-background-color:#e5e5e5;
+  -fx-border-color:#e5e5e5;
+  -fx-text-fill:black;
+ }
+.tab-pane {
+ -fx-tab-min-width:140px;
+ -fx-tab-max-width:140px;
+ -fx-tab-min-height:28px;
+ -fx-tab-max-height:28px;
+ fx-text-align: center;
+ -fx-background-radius: 0;
+ -fx-background-insets: 0;
+}
+/*to remove the blue default colors */
+.tab-pane:focused>.tab-header-area>.headers-region>.tab:selected .focus-indicator {
+ -fx-border-color: none;
+}
+.tab-label {
+ -fx-text-fill: white;
+}
+.tab:selected .tab-label {
+ -fx-text-fill: black;
+}
+/*To set the background color of the tabPane header write in the CSS file:*/
+.tab-pane .tab-header-area .tab-header-background {
+ -fx-background-color: none;
+ -fx-effect: null;
+ -fx-border-width: 1 0 1 0;
+}
+.blueWhiteButton{
+ -fx-background-color:#0078d7;
+ -fx-text-fill:#ffffff;
+}
+.text-field {
+ -fx-border-radius: 0 ;
+ -fx-border-color: black;
+}
+.blueWhiteButton:hover {
+ -fx-background-color:lightblue;
+}
+.errorMessageStyle{
+ -fx-text-fill:red;
+}
+.successMessageStyle{
+ -fx-text-fill:black;
+}
+.button{
+ -fx-background-radius: 0;
+}
+.steelWhiteButton{
+ -fx-background-color:#797979;
+ -fx-text-fill: white;
+}
+.redWhiteButton{
+ -fx-background-color:#C60108;
+ -fx-text-fill:white;
+}
+.redWhiteButton:hover {
+ -fx-background-color:#FFCCCB;
+}
+.steelWhiteButton:hover {
+ -fx-background-color:#D5D7DB;
+}
+.table-view .column-header  {
+ -fx-background-color: white;
+ -fx-border-style:solid ;
+ -fx-border-width: 0.5px;
+ -fx-border-color: #e5e5e5;
+ -fx-border-insets: 0.5;
+}
+.table-view .column-header .label{
+ -fx-text-fill: #B5B5B5;
+}
+.table-view .column-header-background,
+.table-view .column-header-background .filler,
+.table-view .corner {
+ -fx-background-color: transparent;
+
+}
+
+
+
+

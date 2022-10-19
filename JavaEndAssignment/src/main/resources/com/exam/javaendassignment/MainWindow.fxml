@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane prefHeight="586.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-6.0" layoutY="-1.0" prefHeight="96.0" prefWidth="1144.0" style="-fx-background-color: black;">
+         <children>
+            <Label layoutX="117.0" layoutY="14.0" prefHeight="78.0" prefWidth="247.0" text="Library system" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="43.0" fitWidth="65.0" layoutX="41.0" layoutY="32.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../../ico.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <TabPane fx:id="tabPane" layoutX="-18.0" layoutY="59.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="633.0" prefWidth="1152.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabMembers" text="Members">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E5E5E5;">
+                     <children>
+                         <Label layoutX="926.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="150.0" text="Members" textFill="#a5a5a5">
+                             <font>
+                                 <Font size="30.0" />
+                             </font>
+                         </Label>
+                        <TableView fx:id="membersTableView" layoutX="48.0" layoutY="66.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="459.0" prefWidth="1049.0" style="-fx-background-color: White;">
+                          <columns>
+                              <TableColumn prefWidth="134.6666818857193" text="Identifier">
+                              <cellValueFactory>
+                                  <PropertyValueFactory property="identifier"/>
+                              </cellValueFactory>
+                          </TableColumn>
+                              <TableColumn  minWidth="0.0" prefWidth="226.0000762939453" text="Identifier">
+                              <cellValueFactory>
+                                  <PropertyValueFactory property="firstName"/>
+                              </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn   prefWidth="165.66665649414062" text="Last Name">
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="lastName"/>
+                                  </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn   prefWidth="177.66668701171875" text="Birth Date">
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="dateOfBirth"/>
+                                  </cellValueFactory>
+                              </TableColumn>
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btnAddMember" onAction="#onBtnAddAddMemberClicked"  layoutX="991.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add Member" />
+                        <Button fx:id="btnEditMember" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit Member" />
+                        <Button fx:id="btnDeleteMember" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete Member" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabCollection" text="Collection">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="1152.0" style="-fx-background-color: #E5E5E5;">
+                  <children>
+                        <TableView fx:id="libraryItemTableView" layoutX="48.0" layoutY="66.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="459.0" prefWidth="1049.0" style="-fx-background-color: White;">
+                          <columns>
+                              <TableColumn prefWidth="128.3333078622818" text="Item Code">
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="itemCode"/>
+                                  </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="cellAvailability" prefWidth="156.6667022705078" text="Available">
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="availability"/>
+                                  </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn prefWidth="426.6665954589844" text="Title">
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="name"/>
+                                  </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn prefWidth="203.66668701171875" text="Author">
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="author"/>
+                                  </cellValueFactory>
+                              </TableColumn>
+                          </columns>
+                        </TableView>
+                        <Label layoutX="969.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="114.0" text="Items" textFill="#a5a5a5">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnAddItem" onAction="#onBtnAddItemClicked"  layoutX="991.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add item" />
+                        <Button fx:id="btnEditItem" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit item" />
+                        <Button fx:id="btnDeleteItem" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete item" />
+                  </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabLending" text="Lending/receiving">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="604.0" prefWidth="1117.0">
+                     <children>
+                        <AnchorPane layoutX="1.0" layoutY="8.0" prefHeight="594.0" prefWidth="1132.0" style="-fx-background-color: #E5E5E5;">
+                           <children>
+                              <Label fx:id="lblUserName" layoutX="908.0" layoutY="45.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="190.0" text="Welcome">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane layoutX="628.0" layoutY="105.0" prefHeight="448.0" prefWidth="479.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <TextField fx:id="txtFieldItemCode" layoutX="91.0" layoutY="72.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onItemCodeChange" prefHeight="25.0" prefWidth="327.0" promptText="Item code" />
+                                    <TextField fx:id="txtFieldMemberId" layoutX="93.0" layoutY="123.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onMemberIDChange" prefHeight="25.0" prefWidth="326.0" promptText="Member Identifier" />
+                                    <Button fx:id="btnLendItem" layoutX="301.0" layoutY="166.0" mnemonicParsing="false" onAction="#onBtnLendItemClicked" prefHeight="25.0" prefWidth="118.0" styleClass="blueWhiteButton" text="Lend Item" />
+                                    <Label fx:id="lblUserFeedBackLendingItem" layoutX="39.0" layoutY="216.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="394.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="28.0" layoutY="105.0" prefHeight="445.0" prefWidth="552.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <TextField fx:id="txtBoxReceiveItemCode" layoutX="54.0" layoutY="58.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onReceiveItemCodeChange" prefHeight="25.0" prefWidth="447.0" promptText="Item Code" />
+                                    <Button fx:id="btnReceiveItem" layoutX="374.0" layoutY="102.0" mnemonicParsing="false" onAction="#onBtnReceiveItemClicked" prefHeight="25.0" prefWidth="126.0" styleClass="blueWhiteButton" text="Receive item" />
+                                    <Label fx:id="lblUserFeedBackReceivingItem" layoutX="55.0" layoutY="153.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="445.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children></AnchorPane>
+                </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
