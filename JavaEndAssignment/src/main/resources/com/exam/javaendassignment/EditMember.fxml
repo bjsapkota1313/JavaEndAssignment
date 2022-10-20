@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="277.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EditMemberDialogueController">
+<AnchorPane prefHeight="277.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" >
     <children>
     <Label layoutX="27.0" layoutY="14.0" prefHeight="35.0" prefWidth="151.0" text="Edit  Member">
         <font>

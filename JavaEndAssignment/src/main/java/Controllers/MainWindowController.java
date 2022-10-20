@@ -150,4 +150,9 @@ public class MainWindowController implements Initializable {
         loadDialogueBox("EditLibraryItem",new EditItemDialogueController(libraryItemTableView.getSelectionModel().getSelectedItem()));
         libraryItemTableView.refresh(); // refreshing table view whenever it is updated in observable list
     }
+    @FXML
+    private void onBtnEditMemberClicked() {
+        loadDialogueBox("EditMember",new EditMemberDialogueController(membersTableView.getSelectionModel().getSelectedItem()));
+        membersTableView.refresh(); // refreshing table view whenever it is updated in
+    }
 }

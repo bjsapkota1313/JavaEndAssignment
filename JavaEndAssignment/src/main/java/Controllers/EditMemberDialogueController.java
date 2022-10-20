@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EditMemberDialogueController implements Initializable {
@@ -25,11 +27,11 @@ public class EditMemberDialogueController implements Initializable {
 
     @FXML
     private void onBtnUpdateMemberClicked(ActionEvent event) {
-
+        updateMemberDetails();
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
     }
-@FXML
+    @FXML
     private void onBtnCancelClicked(ActionEvent event) {
     Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
     stage.close();
@@ -37,11 +39,19 @@ public class EditMemberDialogueController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        setDetailsOfSelectedMember();
     }
     private void setDetailsOfSelectedMember(){
         txtFieldFirstName.setPromptText(selectedMember.getFirstName());
         txtFieldLastName.setPromptText(selectedMember.getLastName());
-        dateOfBirthPicker.setPromptText(selectedMember.getDateOfBirth().toString());
+        dateOfBirthPicker.setPromptText(selectedMember.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+    }
+    private void updateMemberDetails() {
+        selectedMember.setFirstName(txtFieldFirstName.getText());
+        selectedMember.setLastName(txtFieldLastName.getText());
+        selectedMember.setDateOfBirth(dateOfBirthPicker.getValue() == null
+                ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                : dateOfBirthPicker.getValue());
+
     }
 }

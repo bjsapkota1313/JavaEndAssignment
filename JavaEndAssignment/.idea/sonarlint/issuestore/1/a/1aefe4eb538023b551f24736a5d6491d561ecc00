@@ -1,0 +1,8 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ü‚ùıúÿÿÿÿ
+D
+java:S1659".Declare "txtFieldLastName" on a separate line.(†‚Áğ
+]
+java:S1612""BReplace this lambda with method reference 'Member::getIdentifier'.(¦“‡ùÿÿÿÿ
+R
+java:S1128"0Remove this unused import 'Database.MemberData'.(µÛˆ‡øÿÿÿÿ8ï¦€¿0
