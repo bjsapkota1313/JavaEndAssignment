@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="249.0" prefWidth="359.0" style="-fx-background-color: #e5e5e5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" >
+    <Label layoutX="27.0" layoutY="14.0" prefHeight="35.0" prefWidth="151.0" text="Edit Item">
+        <font>
+            <Font size="18.0" />
+        </font></Label>
+   <TextField fx:id="txtFieldItemTitle" layoutX="27.0" layoutY="74.0" prefHeight="25.0" prefWidth="283.0" />
+   <TextField fx:id="txtFieldAuthorFirstName" layoutX="28.0" layoutY="132.0" prefHeight="25.0" prefWidth="130.0" />
+   <TextField fx:id="txtFieldAuthorLastName" layoutX="176.0" layoutY="132.0" prefHeight="25.0" prefWidth="124.0" />
+   <Button onAction="#onBtnUpdateClicked" layoutX="28.0" layoutY="177.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" styleClass="blueWhiteButton" text="Update" />
+   <Button onAction="#onBtnCancelClicked" layoutX="178.0" layoutY="177.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" styleClass="steelWhiteButton" text="Cancel" />
+   <Label layoutX="27.0" layoutY="57.0" text="Title" />
+   <Label layoutX="27.0" layoutY="117.0" text="Author First Name" />
+   <Label layoutX="176.0" layoutY="117.0" text="Author Last Name" />
+
+</AnchorPane>

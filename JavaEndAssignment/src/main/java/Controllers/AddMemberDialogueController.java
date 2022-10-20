@@ -28,11 +28,10 @@ public class AddMemberDialogueController {
     private final ObservableList<Member> members;
 
     public AddMemberDialogueController(ObservableList<Member> members) {
-
         this.members = members;
     }
     private int getHighestIdentifier(){
-        return Collections.max(members, Comparator.comparing(s -> s.getIdentifier())).getIdentifier()+1; // getting the member having highest id and then adding 1 into it
+        return Collections.max(members, Comparator.comparing(s -> s.getIdentifier())).getIdentifier()+1; // getting the member having the highest id and then adding 1 into it
     }
     private  void addMember (){
        try{

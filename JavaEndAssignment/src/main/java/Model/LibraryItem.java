@@ -3,7 +3,12 @@ package Model;
 public abstract class LibraryItem {
     private final int itemCode;
     private boolean availability ;
-    private final String name ;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private  String name ;
 
     public LibraryItem( int itemCode, boolean availability,String name ) {
         this.itemCode = itemCode;
@@ -28,4 +33,5 @@ public abstract class LibraryItem {
     public String getName() {
         return name;
     }
+
 }

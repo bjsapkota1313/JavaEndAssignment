@@ -58,7 +58,7 @@
                           </columns>
                         </TableView>
                         <Button fx:id="btnAddMember" onAction="#onBtnAddAddMemberClicked"  layoutX="991.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add Member" />
-                        <Button fx:id="btnEditMember" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit Member" />
+                        <Button fx:id="btnEditMember"   layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit Member" />
                         <Button fx:id="btnDeleteMember" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete Member" />
                      </children></AnchorPane>
             </content>
@@ -74,7 +74,7 @@
                                       <PropertyValueFactory property="itemCode"/>
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn fx:id="cellAvailability" prefWidth="156.6667022705078" text="Available">
+                              <TableColumn prefWidth="156.6667022705078" text="Available">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="availability"/>
                                   </cellValueFactory>
@@ -97,7 +97,7 @@
                            </font>
                         </Label>
                         <Button fx:id="btnAddItem" onAction="#onBtnAddItemClicked"  layoutX="991.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add item" />
-                        <Button fx:id="btnEditItem" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit item" />
+                        <Button fx:id="btnEditItem" onAction="#onBtnEditItemClicked" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit item" />
                         <Button fx:id="btnDeleteItem" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete item" />
                   </children></AnchorPane>
             </content>

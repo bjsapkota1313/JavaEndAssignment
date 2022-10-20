@@ -5,7 +5,6 @@ import Database.LibraryItemsData;
 import Database.MemberData;
 import Model.*;
 import com.exam.javaendassignment.AppLibrary;
-import javafx.application.Application;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,10 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
-import java.security.cert.CertificateParsingException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ResourceBundle;
@@ -36,8 +33,6 @@ public class MainWindowController implements Initializable {
     private TableView<Member> membersTableView;
     @FXML
     private ObservableList<Book> bookList;
-@FXML
-private TableColumn cellAvailability;
     @FXML
     public TabPane tabPane;
     @FXML
@@ -142,13 +137,17 @@ private TableColumn cellAvailability;
             dialog.setScene(scene);
             dialog.setTitle(viewName);
             dialog.showAndWait();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML
-    private void  onBtnAddItemClicked(ActionEvent event) {
+    private void  onBtnAddItemClicked() {
         loadDialogueBox("AddLibraryItem",new AddItemDialogueController(bookList));
+    }
+    @FXML
+    private void onBtnEditItemClicked() {
+        loadDialogueBox("EditLibraryItem",new EditItemDialogueController(libraryItemTableView.getSelectionModel().getSelectedItem()));
+        libraryItemTableView.refresh(); // refreshing table view whenever it is updated in observable list
     }
 }
