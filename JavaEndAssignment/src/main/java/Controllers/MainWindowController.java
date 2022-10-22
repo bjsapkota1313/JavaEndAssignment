@@ -1,8 +1,6 @@
 package Controllers;
 
-import Database.LentItemsData;
-import Database.LibraryItemsData;
-import Database.MemberData;
+import Database.Database;
 import Model.*;
 import com.exam.javaendassignment.AppLibrary;
 import javafx.beans.property.StringProperty;
@@ -23,9 +21,8 @@ import java.util.ResourceBundle;
 
 
 public class MainWindowController implements Initializable {
-    private final LibraryItemsData libraryItemDB;
-    private final LentItemsData lentItemDB;
-    private final MemberData memberDB;
+
+    private final Database database;
     private ObservableList<Member> members;
     @FXML
     private TableView<Book> libraryItemTableView;
@@ -45,10 +42,8 @@ public class MainWindowController implements Initializable {
     private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode;
 
 
-    public MainWindowController() {
-        libraryItemDB = new LibraryItemsData();
-        lentItemDB = new LentItemsData();
-        memberDB = new MemberData();
+    public MainWindowController( Database database) {
+        this.database = database;
     }
 
     @Override
@@ -56,26 +51,26 @@ public class MainWindowController implements Initializable {
         lblUserName.setText("Welcome " + "Bijay"); //To do Username
         tabPane.getSelectionModel().select(tabLending);// when app runs making default tab selection on Lending
         // book list
-        bookList=FXCollections.observableList(libraryItemDB.getLibraryBooks());
+        bookList=FXCollections.observableList(database.getLibraryBooks());
         libraryItemTableView.setItems(bookList);
         libraryItemTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         // members
-        members = FXCollections.observableList(memberDB.getMembers());
+        members = FXCollections.observableList(database.getMembers());
         membersTableView.setItems(members);
     }
 
     @FXML
     protected void onBtnLendItemClicked() {
-        LibraryItem lendingLibraryItem = libraryItemDB.getLibraryItemWithItemCode(Integer.parseInt(txtFieldItemCode.getText()));
-        Member lendingMember = memberDB.getMemberById(Integer.parseInt(txtFieldMemberId.getText()));
+        LibraryItem lendingLibraryItem = database.getLibraryItemWithItemCode(Integer.parseInt(txtFieldItemCode.getText()));
+        Member lendingMember = database.getMemberById(Integer.parseInt(txtFieldMemberId.getText()));
 
         if (lendingLibraryItem == null | lendingMember == null) {
             lblUserFeedBackLendingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
             lblUserFeedBackLendingItem.setText("Please check your Item code or Member Id and try again");
         } else {
             // when Some libraryItem is lent to the member new lentItem object is made
-            lentItemDB.addLentItem(new LentItem(lendingLibraryItem, lendingMember, LocalDate.now()));
+            database.addLentItem(new LentItem(lendingLibraryItem, lendingMember, LocalDate.now()));
             lblUserFeedBackLendingItem.getStyleClass().add("successMessageStyle");
             lblUserFeedBackLendingItem.setText("The " + lendingLibraryItem.getName() + " has been lent to " + lendingMember);
             updateLibraryItemAvailability(lendingLibraryItem,false); // updating lending item availability status
@@ -85,7 +80,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     protected void onBtnReceiveItemClicked() {
-        LentItem receivingLentItem = lentItemDB.getLentItemWithLentItems(Integer.parseInt(txtBoxReceiveItemCode.getText()));
+        LentItem receivingLentItem = database.getLentItemWithItemCode(Integer.parseInt(txtBoxReceiveItemCode.getText()));
         if (receivingLentItem == null) {
             lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
             lblUserFeedBackReceivingItem.setText("The entered Item code is not lent or invalid item code");
@@ -96,7 +91,7 @@ public class MainWindowController implements Initializable {
                 // for now Not receiving a book whenever it later than 21 days fine can be adopted later on
             } else {
                 lblUserFeedBackReceivingItem.getStyleClass().add("successMessageStyle");
-                lentItemDB.removeLentItem(receivingLentItem); // removing from LentItem list
+                database.removeLentItem(receivingLentItem); // removing from LentItem list
                 updateLibraryItemAvailability(receivingLentItem.getItem(),true);
                 libraryItemTableView.refresh();
                 // updates the library item to available again
@@ -164,5 +159,4 @@ public class MainWindowController implements Initializable {
     private void onBtnDeleteMemberClicked(){
         members.removeAll(membersTableView.getSelectionModel().getSelectedItems());
     }
-
 }

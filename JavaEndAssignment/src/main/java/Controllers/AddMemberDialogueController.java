@@ -1,6 +1,5 @@
 package Controllers;
 
-import Database.MemberData;
 import Model.Member;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

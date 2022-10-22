@@ -1,7 +1,6 @@
 package Controllers;
 
-import Database.UserData;
-import Model.Person;
+import Database.Database;
 import Model.User;
 import com.exam.javaendassignment.AppLibrary;
 import javafx.beans.property.StringProperty;
@@ -22,9 +21,9 @@ public class LoginViewController {
     public Label lblDisplayError;
     @FXML
     public AnchorPane anchorPane;
-    private UserData database;
+    private Database database;
     public LoginViewController() {
-         database= new UserData();
+         database= new Database();
     }
 
     private  final int SET_DIGIT_BIT = 0b100;
@@ -41,7 +40,7 @@ private Button btnLogin;
         if(loggedUser==null){
             lblDisplayError.setText("Invalid username or password combination");}
         else {
-            loadScene("MainWindow.fxml", new MainWindowController());
+            loadScene("MainWindow.fxml", new MainWindowController(database));
         }
 
     }

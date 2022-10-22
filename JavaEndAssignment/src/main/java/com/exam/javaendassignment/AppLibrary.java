@@ -1,15 +1,13 @@
 package com.exam.javaendassignment;
 
 import Controllers.MainWindowController;
-import Database.MemberData;
-import Model.Member;
+import Database.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.time.LocalDate;
+
 
 
 public class AppLibrary extends Application {
@@ -32,13 +30,20 @@ public class AppLibrary extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource("MainWindow.fxml"));
-       fxmlLoader.setController(new MainWindowController());
+       fxmlLoader.setController(new MainWindowController(new Database()));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
 
     }
+    @Override
+    public void stop(){
+        System.out.println("Stage is closing");
+        // Save file
+       
+    }
+
 
 
 }
