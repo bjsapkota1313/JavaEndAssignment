@@ -59,7 +59,7 @@
                         </TableView>
                         <Button fx:id="btnAddMember" onAction="#onBtnAddAddMemberClicked"  layoutX="991.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add Member" />
                         <Button fx:id="btnEditMember" onAction="#onBtnEditMemberClicked"  layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit Member" />
-                        <Button fx:id="btnDeleteMember" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete Member" />
+                        <Button fx:id="btnDeleteMember" onAction="#onBtnDeleteMemberClicked" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete Member" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -98,7 +98,7 @@
                         </Label>
                         <Button fx:id="btnAddItem" onAction="#onBtnAddItemClicked"  layoutX="991.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add item" />
                         <Button fx:id="btnEditItem" onAction="#onBtnEditItemClicked" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit item" />
-                        <Button fx:id="btnDeleteItem" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete item" />
+                        <Button fx:id="btnDeleteItem" onAction="#onBtnDeleteItemClicked" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete item" />
                   </children></AnchorPane>
             </content>
           </Tab>

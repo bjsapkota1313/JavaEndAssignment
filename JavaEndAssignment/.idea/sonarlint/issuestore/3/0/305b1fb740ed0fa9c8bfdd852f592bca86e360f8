@@ -1,10 +1,10 @@
 
-a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
 m
-java:S1192I"RDefine a constant instead of duplicating this literal "errorMessageStyle" 3 times.(‘Ş®§ÿÿÿÿÿ
+java:S1192J"RDefine a constant instead of duplicating this literal "errorMessageStyle" 3 times.(‘Ş®§ÿÿÿÿÿ
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ü‚ùıúÿÿÿÿ
 w
-java:S4144r"aUpdate this method so that its implementation is not identical to "onItemCodeChange" on line 108.(İİú—
+java:S4144s"aUpdate this method so that its implementation is not identical to "onItemCodeChange" on line 109.(İİú—
 ?
 java:S1659)")Declare "btnLendItem" on a separate line.(±òÀâ
 r
@@ -12,4 +12,4 @@ java:S1659+"WDeclare "lblUserFeedBackLendingItem" and all following declaration
 h
 java:S1659-"MDeclare "txtFieldMemberId" and all following declarations on a separate line.(ÇàŸÈıÿÿÿÿ
 4
-java:S2178H"Correct this "|" to "||".(õ£ì‚ùÿÿÿÿ
+java:S2178I"Correct this "|" to "||".(õ£ì‚ùÿÿÿÿ

@@ -38,8 +38,6 @@ b
 2src/main/java/Controllers/LoginViewController.java,1\5\156eadf0d240a52c5a189b703973c868dfbf80f1
 O
 src/main/java/Model/Member.java,0\4\04a26749c1d553304386a9c6abfc4002609aa213
-c
-3src/main/java/Controllers/MainWindowController.java,3\0\305b1fb740ed0fa9c8bfdd852f592bca86e360f8
 k
 ;src/main/java/Controllers/EditMemberDialogueController.java,0\e\0e94ca132719790ee3c567d095ae5fdae1856453
 i
@@ -48,3 +46,5 @@ j
 :src/main/java/Controllers/AddMemberDialogueController.java,1\a\1aefe4eb538023b551f24736a5d6491d561ecc00
 h
 8src/main/java/Controllers/AddItemDialogueController.java,2\b\2bec12500168175130ed617e947c16ed37c2b9d3
+c
+3src/main/java/Controllers/MainWindowController.java,3\0\305b1fb740ed0fa9c8bfdd852f592bca86e360f8

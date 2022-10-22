@@ -58,6 +58,7 @@ public class MainWindowController implements Initializable {
         // book list
         bookList=FXCollections.observableList(libraryItemDB.getLibraryBooks());
         libraryItemTableView.setItems(bookList);
+        libraryItemTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         // members
         members = FXCollections.observableList(memberDB.getMembers());
@@ -155,4 +156,13 @@ public class MainWindowController implements Initializable {
         loadDialogueBox("EditMember",new EditMemberDialogueController(membersTableView.getSelectionModel().getSelectedItem()));
         membersTableView.refresh(); // refreshing table view whenever it is updated in
     }
+    @FXML
+    private void onBtnDeleteItemClicked() {
+        bookList.removeAll(libraryItemTableView.getSelectionModel().getSelectedItems());
+    }
+    @FXML
+    private void onBtnDeleteMemberClicked(){
+        members.removeAll(membersTableView.getSelectionModel().getSelectedItems());
+    }
+
 }
