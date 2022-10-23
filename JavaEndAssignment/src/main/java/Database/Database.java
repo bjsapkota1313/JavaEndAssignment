@@ -2,20 +2,15 @@ package Database;
 
 import Model.*;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-    private final List<LentItem> lentItems;
-    private final List<Book> items;
-    private final  Book bookJava;
-    private  final Book bookCHash;
-    private final  Book bookMountEverest;
-    private final Author wilco;
-    private final  Author vries;
-    private final Author whitaker;
-    private final List<Member> members;
+    private  List<LentItem> lentItems;
+    private  List<Book> books;
+    private  List<Member> members;
     private final List<User> users;
 
     public Database() {
@@ -23,25 +18,10 @@ public class Database {
         lentItems= new ArrayList<LentItem>();
 
         // library Items
-        wilco = new Author("Wilco","Dekker");
-        vries = new Author("E. de ","Vries");
-        whitaker = new Author("RB","Whitaker");
-        bookJava= new Book("Java forDummies,13 th edition",233,true,vries);
-        bookCHash = new Book("C#,14th edition",234,true,whitaker);
-        bookMountEverest = new Book("Mount Everest,15th edition",235,true,wilco);
-        items = new ArrayList<Book>();
-        items.add(bookJava);
-        items.add(bookCHash);
-        items.add(bookMountEverest);
+        books = new ArrayList<Book>();
 
         // members
-        Member memberPiet= new Member(LocalDate.of(2000,06,21),"Piet"," de Vries",32);
-        Member memberBijay= new Member(LocalDate.of(2001,10,26),"Bijay","Sapkota",33);
-        Member memberDaniel= new Member(LocalDate.of(1990,10,05),"Daniel","de Vries",34);
         members = new ArrayList<Member>();
-        members.add(memberPiet);
-        members.add(memberDaniel);
-        members.add(memberBijay);
 
         // users
         users = new ArrayList<User>();
@@ -49,8 +29,29 @@ public class Database {
         users.add(new User("Amy","Jackson","Admin@1234"));
 
     }
-    public void addLentItem(LentItem lentItem) {
 
+    public void createAndAddMembersToTheList() {
+        Member memberPiet= new Member(LocalDate.of(2000,06,21),"Piet"," de Vries",32);
+        Member memberBijay= new Member(LocalDate.of(2001,10,26),"Bijay","Sapkota",33);
+        Member memberDaniel= new Member(LocalDate.of(1990,10,05),"Daniel","de Vries",34);
+        members.add(memberPiet);
+        members.add(memberDaniel);
+        members.add(memberBijay);
+    }
+
+    public void createAndAddBookToList() {
+        Author wilco = new Author("Wilco","Dekker");
+        Author vries = new Author("E. de ","Vries");
+        Author whitaker = new Author("RB","Whitaker");
+        Book bookJava= new Book("Java forDummies,13 th edition",233,Availability.Yes,vries);
+        Book bookCHash = new Book("C#,14th edition",234,Availability.Yes,whitaker);
+        Book bookMountEverest = new Book("Mount Everest,15th edition",235,Availability.Yes,wilco);
+        books.add(bookJava);
+        books.add(bookCHash);
+        books.add(bookMountEverest);
+    }
+
+    public void addLentItem(LentItem lentItem) {
         lentItems.add(lentItem);
     }
     public void removeLentItem(LentItem lentItem){
@@ -69,11 +70,20 @@ public class Database {
     }
     public  List<Book> getLibraryBooks(){
 
-        return items;
+        return books;
+    }
+    public void setMembersFromSerializedFile(File file) {
+        members= (List<Member>)(List<?>)readSerializableList(file);
+    }
+    public void setBooksFromSerializedFile(File file) {
+        books= (List<Book>)(List<?>)readSerializableList(file);
+    }
+    public void setLentItemsFromSerializedFile(File file) {
+        lentItems= (List<LentItem>)(List<?>)readSerializableList(file);
     }
     public LibraryItem getLibraryItemWithItemCode(int libraryItemCode){
         LibraryItem returningLibraryItem=null;
-        for (LibraryItem libraryItem : items
+        for (LibraryItem libraryItem : books
         ) {
             if(libraryItem.getItemCode() == libraryItemCode){
                 returningLibraryItem=libraryItem;
@@ -100,10 +110,41 @@ public class Database {
         ) {
             if (user.getUserName().equals(username) && user.getPassword().equals(password))
             {
-                loggingUser = user;
+                 loggingUser= user;
             }
 
         }
         return loggingUser;
+    }
+    public void writeSerializable(File file,List<Serializable> list) throws IOException {
+        OutputStream outputStream  = new FileOutputStream(file);
+        ObjectOutputStream objectStream=new ObjectOutputStream(outputStream);
+        objectStream.writeObject(list);
+        objectStream.flush();
+        //closing the stream
+        objectStream.close();
+    }
+    private List<Serializable> readSerializableList(File file){
+        List<Serializable> readingList = new ArrayList<>();
+        try {
+            ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(file));
+            readingList=(List<Serializable>) objectInputStream.readObject();
+            objectInputStream.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return readingList;
+    }
+    public List<LentItem> getLentItems(){
+        return lentItems;
+    }
+    public void updateLibraryItemAvailability(int itemCode,Availability availability){
+        for (LibraryItem item :books
+             ) {
+            if(item.getItemCode() == itemCode){
+                item.setAvailability(availability);
+            }
+        }
     }
 }

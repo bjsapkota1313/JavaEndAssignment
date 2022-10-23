@@ -3,6 +3,7 @@ package Controllers;
 import Database.Database;
 import Model.*;
 import com.exam.javaendassignment.AppLibrary;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +36,7 @@ public class MainWindowController implements Initializable {
     @FXML
     public Tab tabLending;
     @FXML
-    private Button btnReceiveItem, btnLendItem;
+    private Button btnReceiveItem, btnLendItem,btnEditMember,btnDeleteMember,btnEditItem,btnDeleteItem;
     @FXML
     private Label lblUserName, lblUserFeedBackLendingItem,lblUserFeedBackReceivingItem;
     @FXML
@@ -45,7 +46,6 @@ public class MainWindowController implements Initializable {
     public MainWindowController( Database database) {
         this.database = database;
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblUserName.setText("Welcome " + "Bijay"); //To do Username
@@ -58,6 +58,10 @@ public class MainWindowController implements Initializable {
         // members
         members = FXCollections.observableList(database.getMembers());
         membersTableView.setItems(members);
+        membersTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        btnEditMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
+
+        disableButtons();
     }
 
     @FXML
@@ -73,7 +77,7 @@ public class MainWindowController implements Initializable {
             database.addLentItem(new LentItem(lendingLibraryItem, lendingMember, LocalDate.now()));
             lblUserFeedBackLendingItem.getStyleClass().add("successMessageStyle");
             lblUserFeedBackLendingItem.setText("The " + lendingLibraryItem.getName() + " has been lent to " + lendingMember);
-            updateLibraryItemAvailability(lendingLibraryItem,false); // updating lending item availability status
+           database.updateLibraryItemAvailability(lendingLibraryItem.getItemCode(),Availability.No); // updating lending item availability status
             libraryItemTableView.refresh();
         }
     }
@@ -92,7 +96,7 @@ public class MainWindowController implements Initializable {
             } else {
                 lblUserFeedBackReceivingItem.getStyleClass().add("successMessageStyle");
                 database.removeLentItem(receivingLentItem); // removing from LentItem list
-                updateLibraryItemAvailability(receivingLentItem.getItem(),true);
+                database.updateLibraryItemAvailability(receivingLentItem.getItem().getItemCode(),Availability.Yes);
                 libraryItemTableView.refresh();
                 // updates the library item to available again
                 lblUserFeedBackReceivingItem.setText(receivingLentItem.getItem().getName() +" is available again to Lend");
@@ -119,10 +123,9 @@ public class MainWindowController implements Initializable {
     @FXML
     private void onBtnAddAddMemberClicked(ActionEvent event) {
       loadDialogueBox("AddMember",new AddMemberDialogueController(members));
+        membersTableView.getSelectionModel().clearSelection();
     }
-    private void updateLibraryItemAvailability(LibraryItem libraryItem,boolean availability) {
-        libraryItem.setAvailability(availability);
-    }
+
     private void loadDialogueBox(String viewName,Object controller){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource(viewName+".fxml"));
@@ -140,23 +143,37 @@ public class MainWindowController implements Initializable {
     @FXML
     private void  onBtnAddItemClicked() {
         loadDialogueBox("AddLibraryItem",new AddItemDialogueController(bookList));
+        libraryItemTableView.getSelectionModel().clearSelection();
     }
     @FXML
     private void onBtnEditItemClicked() {
         loadDialogueBox("EditLibraryItem",new EditItemDialogueController(libraryItemTableView.getSelectionModel().getSelectedItem()));
         libraryItemTableView.refresh(); // refreshing table view whenever it is updated in observable list
+        libraryItemTableView.getSelectionModel().clearSelection();
     }
     @FXML
     private void onBtnEditMemberClicked() {
         loadDialogueBox("EditMember",new EditMemberDialogueController(membersTableView.getSelectionModel().getSelectedItem()));
         membersTableView.refresh(); // refreshing table view whenever it is updated in
+        membersTableView.getSelectionModel().clearSelection(); // clearing selection
     }
     @FXML
     private void onBtnDeleteItemClicked() {
         bookList.removeAll(libraryItemTableView.getSelectionModel().getSelectedItems());
+        libraryItemTableView.getSelectionModel().clearSelection();
+        libraryItemTableView.getSelectionModel().clearSelection(); // clearing selection
     }
     @FXML
     private void onBtnDeleteMemberClicked(){
         members.removeAll(membersTableView.getSelectionModel().getSelectedItems());
+        membersTableView.getSelectionModel().clearSelection(); // clearing selection
     }
+    private void disableButtons(){
+        // preventing the null point expectation when user does not select in Tableview and try to Edit or Delete Item
+        btnDeleteItem.disableProperty().bind(Bindings.isEmpty(libraryItemTableView.getSelectionModel().getSelectedItems()));
+        btnEditItem.disableProperty().bind(Bindings.isEmpty(libraryItemTableView.getSelectionModel().getSelectedItems()));
+        btnDeleteMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
+        btnEditMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
+    }
+
 }

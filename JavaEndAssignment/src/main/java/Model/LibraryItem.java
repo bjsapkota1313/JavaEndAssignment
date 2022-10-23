@@ -1,8 +1,10 @@
 package Model;
 
-public abstract class LibraryItem {
+import java.io.Serializable;
+
+public abstract class LibraryItem implements Serializable {
     private final int itemCode;
-    private boolean availability ;
+    private Availability availability ;
 
     public void setName(String name) {
         this.name = name;
@@ -10,13 +12,13 @@ public abstract class LibraryItem {
 
     private  String name ;
 
-    public LibraryItem( int itemCode, boolean availability,String name ) {
+    public LibraryItem( int itemCode, Availability availability,String name ) {
         this.itemCode = itemCode;
         this.availability = availability;
         this.name = name;
     }
 
-    public void setAvailability(boolean availability) {
+    public void setAvailability(Availability availability) {
         this.availability = availability;
     }
 
@@ -25,7 +27,7 @@ public abstract class LibraryItem {
         return itemCode;
     }
 
-    public boolean getAvailability() {
+    public Availability getAvailability() {
         return availability;
     }
 

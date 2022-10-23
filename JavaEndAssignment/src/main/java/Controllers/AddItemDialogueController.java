@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.Author;
+import Model.Availability;
 import Model.Book;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,6 +36,7 @@ public class AddItemDialogueController {
     }
     private void addItem(){
         // when ever new book is added , it is available to lend
-        bookList.add(new Book(txtFieldItemTitle.getText(),getHighestItemCode(),true,new Author(txtFieldAuthorFirstName.getText(),txtFieldAuthorLastName.getText())));
+        bookList.add(new Book(txtFieldItemTitle.getText(),getHighestItemCode(), Availability.Yes,new Author(txtFieldAuthorFirstName.getText(),txtFieldAuthorLastName.getText())));
     }
+
 }
