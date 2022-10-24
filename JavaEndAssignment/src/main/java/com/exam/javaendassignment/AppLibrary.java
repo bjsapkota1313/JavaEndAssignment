@@ -1,5 +1,6 @@
 package com.exam.javaendassignment;
 
+import Controllers.LoginViewController;
 import Controllers.MainWindowController;
 import Database.Database;
 import javafx.application.Application;
@@ -18,17 +19,17 @@ public class AppLibrary extends Application {
     public static void main(String[] args) {
     launch();
 }
-/*
+
   @Override
     public void start(Stage stage) throws IOException {
        FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource("LoginView.fxml"));
+       fxmlLoader.setController(new LoginViewController(database));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Login");
+      scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
-
-*/
    // To Work with MainWindow
 
     public AppLibrary() throws FileNotFoundException {
@@ -39,16 +40,7 @@ public class AppLibrary extends Application {
         insertDataOnDatabase();
     }
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource("MainWindow.fxml"));
-       fxmlLoader.setController(new MainWindowController(database));
-        Scene scene = new Scene(fxmlLoader.load());
-        scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
 
-    }
     @Override
     public void stop() throws IOException {
         // writing everything when application is stopped

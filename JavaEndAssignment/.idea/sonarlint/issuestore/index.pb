@@ -24,8 +24,6 @@ O
 src/main/java/Model/Person.java,2\2\22aa82eee60b2c619bffc6a6d67dd02c8698be57
 O
 src/main/java/Model/Member.java,0\4\04a26749c1d553304386a9c6abfc4002609aa213
-h
-8src/main/java/Controllers/AddItemDialogueController.java,2\b\2bec12500168175130ed617e947c16ed37c2b9d3
 T
 $src/main/java/Database/Database.java,3\4\346f01a89f8acac5ce6dbde3595e79fd81d4b5c2
 U
@@ -34,15 +32,5 @@ T
 $src/main/java/Model/LibraryItem.java,e\b\eb49b81cda94b228593003924f00266e8a12cda8
 Q
 !src/main/java/Model/LentItem.java,4\0\4013f67ace6f8e734065f30f0e9a36e6531363ee
-i
-9src/main/java/Controllers/EditItemDialogueController.java,5\4\548757996f005d65e7e74a11de5378ae87f1e919
 j
 :src/main/java/Controllers/AddMemberDialogueController.java,1\a\1aefe4eb538023b551f24736a5d6491d561ecc00
-k
-;src/main/java/Controllers/EditMemberDialogueController.java,0\e\0e94ca132719790ee3c567d095ae5fdae1856453
-b
-2src/main/java/Controllers/LoginViewController.java,1\5\156eadf0d240a52c5a189b703973c868dfbf80f1
-h
-8src/main/java/com/exam/javaendassignment/AppLibrary.java,5\c\5cdaa2206ea9ed436ed00b9b5e9ce7fddd05ff50
-c
-3src/main/java/Controllers/MainWindowController.java,3\0\305b1fb740ed0fa9c8bfdd852f592bca86e360f8

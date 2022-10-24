@@ -21,26 +21,30 @@ public class LoginViewController {
     public Label lblDisplayError;
     @FXML
     public AnchorPane anchorPane;
-    private Database database;
-    public LoginViewController() {
-         database= new Database();
-    }
+    private  final Database database;
+    private  User loggedUser;
 
     private  final int SET_DIGIT_BIT = 0b100;
     private  final int SET_LETTER_BIT = 0b010;
     private  final int SET_SPECIAL_BIT = 0b001;
     @FXML
-    public PasswordField pswdFieldPassword;
-    public TextField txtFieldUserName;
+    private PasswordField pswdFieldPassword;
     @FXML
-private Button btnLogin;
+    private TextField txtFieldUserName;
+    @FXML
+    private Button btnLogin;
+
+    public LoginViewController(Database database) {
+        this.database = database;
+    }
+
     @FXML
     protected void onLoginButtonClicked(){
-        User loggedUser=database.loginWithCredentials(txtFieldUserName.getText(), pswdFieldPassword.getText());
+         loggedUser=database.loginWithCredentials(txtFieldUserName.getText(), pswdFieldPassword.getText());
         if(loggedUser==null){
             lblDisplayError.setText("Invalid username or password combination");}
         else {
-            loadScene("MainWindow.fxml", new MainWindowController(database));
+            loadScene("MainWindow.fxml", new MainWindowController(database,loggedUser));
         }
 
     }
@@ -60,6 +64,7 @@ private Button btnLogin;
     }
     @FXML
     public void onPasswordTextChange(StringProperty observable, String oldValue, String newValue) {
+        lblDisplayError.setText("");
         btnLogin.setDisable(!isPasswordValid(newValue));
     }
     public void loadScene(String name, Object controller) {
@@ -74,6 +79,10 @@ private Button btnLogin;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    private void onTextFieldUsernameChanged(StringProperty observable, String oldValue, String newValue){
+        lblDisplayError.setText("");
     }
 
 

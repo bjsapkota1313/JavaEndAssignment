@@ -41,14 +41,16 @@ public class MainWindowController implements Initializable {
     private Label lblUserName, lblUserFeedBackLendingItem,lblUserFeedBackReceivingItem;
     @FXML
     private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode;
+    private User currentLoggedUser;
 
 
-    public MainWindowController( Database database) {
+    public MainWindowController( Database database,User currentLoggedUser) {
+        this.currentLoggedUser = currentLoggedUser;
         this.database = database;
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        lblUserName.setText("Welcome " + "Bijay"); //To do Username
+        lblUserName.setText("Welcome " + currentLoggedUser); //To do Username
         tabPane.getSelectionModel().select(tabLending);// when app runs making default tab selection on Lending
         // book list
         bookList=FXCollections.observableList(database.getLibraryBooks());
