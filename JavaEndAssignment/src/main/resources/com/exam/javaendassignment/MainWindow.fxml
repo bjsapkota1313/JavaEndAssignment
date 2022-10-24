@@ -108,7 +108,7 @@
                      <children>
                         <AnchorPane layoutX="1.0" layoutY="8.0" prefHeight="594.0" prefWidth="1132.0" style="-fx-background-color: #E5E5E5;">
                            <children>
-                              <Label fx:id="lblUserName" layoutX="775.0" layoutY="62.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="334.0" text="Welcome">
+                              <Label fx:id="lblUserName" layoutX="775.0" layoutY="62.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="334.0" text="Welcome" textFill="#a5a5a5">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

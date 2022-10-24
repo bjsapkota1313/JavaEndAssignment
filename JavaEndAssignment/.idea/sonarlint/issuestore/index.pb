@@ -34,3 +34,15 @@ Q
 !src/main/java/Model/LentItem.java,4\0\4013f67ace6f8e734065f30f0e9a36e6531363ee
 j
 :src/main/java/Controllers/AddMemberDialogueController.java,1\a\1aefe4eb538023b551f24736a5d6491d561ecc00
+k
+;src/main/java/Controllers/EditMemberDialogueController.java,0\e\0e94ca132719790ee3c567d095ae5fdae1856453
+c
+3src/main/java/Controllers/MainWindowController.java,3\0\305b1fb740ed0fa9c8bfdd852f592bca86e360f8
+b
+2src/main/java/Controllers/LoginViewController.java,1\5\156eadf0d240a52c5a189b703973c868dfbf80f1
+h
+8src/main/java/Controllers/AddItemDialogueController.java,2\b\2bec12500168175130ed617e947c16ed37c2b9d3
+h
+8src/main/java/com/exam/javaendassignment/AppLibrary.java,5\c\5cdaa2206ea9ed436ed00b9b5e9ce7fddd05ff50
+i
+9src/main/java/Controllers/EditItemDialogueController.java,5\4\548757996f005d65e7e74a11de5378ae87f1e919
