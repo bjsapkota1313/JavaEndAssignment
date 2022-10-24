@@ -1,0 +1,14 @@
+
+m
+java:S1192L"RDefine a constant instead of duplicating this literal "errorMessageStyle" 3 times.(‘Ş®§ÿÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ü‚ùıúÿÿÿÿ
+w
+java:S4144u"aUpdate this method so that its implementation is not identical to "onItemCodeChange" on line 111.(İİú—
+c
+java:S1659("HDeclare "btnLendItem" and all following declarations on a separate line.(â¦ƒûÿÿÿÿ
+r
+java:S1659*"WDeclare "lblUserFeedBackLendingItem" and all following declarations on a separate line.(ïĞ¦´ıÿÿÿÿ
+h
+java:S1659,"MDeclare "txtFieldMemberId" and all following declarations on a separate line.(ÇàŸÈıÿÿÿÿ
+4
+java:S2178K"Correct this "|" to "||".(õ£ì‚ùÿÿÿÿ

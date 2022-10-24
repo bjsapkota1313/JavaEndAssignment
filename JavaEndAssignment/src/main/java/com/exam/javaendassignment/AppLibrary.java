@@ -19,26 +19,29 @@ public class AppLibrary extends Application {
     public static void main(String[] args) {
     launch();
 }
-
-  @Override
+    public AppLibrary() throws FileNotFoundException {
+        database=new Database();
+        membersFile = new File("src//Members.txt");
+        booksFile= new File("src//Books.txt");
+        lentItemsFile= new File("src//LentItems.txt");
+        insertDataOnDatabase();
+    }
+    @Override
+    public void start(Stage stage) throws IOException {
+        new SceneLoader().loadScene("LoginView",new LoginViewController(database),stage,false);
+    }
+   /* @Override
     public void start(Stage stage) throws IOException {
        FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource("LoginView.fxml"));
        fxmlLoader.setController(new LoginViewController(database));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Login");
-      scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
-   // To Work with MainWindow
+    */
 
-    public AppLibrary() throws FileNotFoundException {
-        database=new Database();
-         membersFile = new File("src//Members.txt");
-         booksFile= new File("src//Books.txt");
-         lentItemsFile= new File("src//LentItems.txt");
-        insertDataOnDatabase();
-    }
 
 
     @Override

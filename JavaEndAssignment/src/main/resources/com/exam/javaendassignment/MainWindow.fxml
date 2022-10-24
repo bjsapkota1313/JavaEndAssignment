@@ -28,7 +28,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E5E5E5;">
                      <children>
-                         <Label layoutX="926.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="150.0" text="Members" textFill="#a5a5a5">
+                         <Label layoutX="947.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="150.0" text="Members" textFill="#a5a5a5">
                              <font>
                                  <Font size="30.0" />
                              </font>
@@ -91,7 +91,7 @@
                               </TableColumn>
                           </columns>
                         </TableView>
-                        <Label layoutX="969.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="114.0" text="Items" textFill="#a5a5a5">
+                        <Label layoutX="983.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="114.0" text="Items" textFill="#a5a5a5">
                            <font>
                               <Font size="30.0" />
                            </font>

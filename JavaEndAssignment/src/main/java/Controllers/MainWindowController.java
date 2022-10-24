@@ -3,6 +3,7 @@ package Controllers;
 import Database.Database;
 import Model.*;
 import com.exam.javaendassignment.AppLibrary;
+import com.exam.javaendassignment.SceneLoader;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -123,39 +124,24 @@ public class MainWindowController implements Initializable {
         lblUserFeedBackReceivingItem.setText("");
     }
     @FXML
-    private void onBtnAddAddMemberClicked(ActionEvent event) {
-      loadDialogueBox("AddMember",new AddMemberDialogueController(members));
+    private void onBtnAddAddMemberClicked(ActionEvent event) throws IOException {
+        new SceneLoader().loadScene("AddMember",new AddMemberDialogueController(members),new Stage(),true);
         membersTableView.getSelectionModel().clearSelection();
     }
-
-    private void loadDialogueBox(String viewName,Object controller){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource(viewName+".fxml"));
-            fxmlLoader.setController(controller);
-            Scene scene = new Scene(fxmlLoader.load());
-            scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
-            Stage dialog = new Stage();
-            dialog.setScene(scene);
-            dialog.setTitle(viewName);
-            dialog.showAndWait();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @FXML
-    private void  onBtnAddItemClicked() {
-        loadDialogueBox("AddLibraryItem",new AddItemDialogueController(bookList));
+    private void  onBtnAddItemClicked() throws IOException {
+        new SceneLoader().loadScene("AddLibraryItem",new AddItemDialogueController(bookList),new Stage(),true);
         libraryItemTableView.getSelectionModel().clearSelection();
     }
     @FXML
-    private void onBtnEditItemClicked() {
-        loadDialogueBox("EditLibraryItem",new EditItemDialogueController(libraryItemTableView.getSelectionModel().getSelectedItem()));
+    private void onBtnEditItemClicked() throws IOException {
+        new SceneLoader().loadScene("EditLibraryItem",new EditItemDialogueController(libraryItemTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
         libraryItemTableView.refresh(); // refreshing table view whenever it is updated in observable list
         libraryItemTableView.getSelectionModel().clearSelection();
     }
     @FXML
-    private void onBtnEditMemberClicked() {
-        loadDialogueBox("EditMember",new EditMemberDialogueController(membersTableView.getSelectionModel().getSelectedItem()));
+    private void onBtnEditMemberClicked() throws IOException {
+        new SceneLoader().loadScene("EditMember",new EditMemberDialogueController(membersTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
         membersTableView.refresh(); // refreshing table view whenever it is updated in
         membersTableView.getSelectionModel().clearSelection(); // clearing selection
     }

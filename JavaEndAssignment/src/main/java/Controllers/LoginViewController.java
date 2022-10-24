@@ -3,6 +3,7 @@ package Controllers;
 import Database.Database;
 import Model.User;
 import com.exam.javaendassignment.AppLibrary;
+import com.exam.javaendassignment.SceneLoader;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,12 +40,12 @@ public class LoginViewController {
     }
 
     @FXML
-    protected void onLoginButtonClicked(){
+    protected void onLoginButtonClicked() throws IOException {
          loggedUser=database.loginWithCredentials(txtFieldUserName.getText(), pswdFieldPassword.getText());
         if(loggedUser==null){
             lblDisplayError.setText("Invalid username or password combination");}
         else {
-            loadScene("MainWindow.fxml", new MainWindowController(database,loggedUser));
+            new SceneLoader().loadScene("MainWindow",new MainWindowController(database,loggedUser),(Stage) anchorPane.getScene().getWindow(),false); // Displaying Main window
         }
 
     }
@@ -66,19 +67,6 @@ public class LoginViewController {
     public void onPasswordTextChange(StringProperty observable, String oldValue, String newValue) {
         lblDisplayError.setText("");
         btnLogin.setDisable(!isPasswordValid(newValue));
-    }
-    public void loadScene(String name, Object controller) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource(name));
-            fxmlLoader.setController(controller);
-            Scene scene = new Scene(fxmlLoader.load());
-            scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
-            Stage window = (Stage) anchorPane.getScene().getWindow();
-            window.setTitle(name.replace(".fxml", ""));
-            window.setScene(scene);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
     @FXML
     private void onTextFieldUsernameChanged(StringProperty observable, String oldValue, String newValue){
