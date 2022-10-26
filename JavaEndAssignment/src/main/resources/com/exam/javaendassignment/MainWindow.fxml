@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="586.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane prefHeight="586.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="-6.0" layoutY="-1.0" prefHeight="96.0" prefWidth="1144.0" style="-fx-background-color: black;">
          <children>
@@ -60,7 +60,7 @@
                         <Button fx:id="btnAddMember" layoutX="991.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnAddAddMemberClicked" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add Member" />
                         <Button fx:id="btnEditMember" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnEditMemberClicked" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit Member" />
                         <Button fx:id="btnDeleteMember" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnDeleteMemberClicked" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete Member" />
-                        <TextField fx:id="txtFieldSearchName" onTextChange="#onSearchMemberTxtFieldChange" alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" prefHeight="25.0" prefWidth="301.0" promptText="Search Members"  />
+                        <TextField  alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" onTextChange="#onSearchMemberTxtFieldChange" prefHeight="25.0" prefWidth="301.0" promptText="Search Members" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -100,6 +100,7 @@
                         <Button fx:id="btnAddItem" layoutX="991.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnAddItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add item" />
                         <Button fx:id="btnEditItem" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnEditItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit item" />
                         <Button fx:id="btnDeleteItem" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnDeleteItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete item" />
+                      <TextField  alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" onTextChange="#onSearchItemTxtFieldChange" prefHeight="25.0" prefWidth="301.0" promptText="Search Library Items" />
                   </children></AnchorPane>
             </content>
           </Tab>

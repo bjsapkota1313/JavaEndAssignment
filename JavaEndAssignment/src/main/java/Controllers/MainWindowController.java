@@ -7,6 +7,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,9 +40,8 @@ public class MainWindowController implements Initializable {
     @FXML
     private Label lblUserName, lblUserFeedBackLendingItem,lblUserFeedBackReceivingItem;
     @FXML
-    private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode,txtFieldSearchName;
+    private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode;
     private User currentLoggedUser;
-
 
     public MainWindowController( Database database,User currentLoggedUser) {
         this.currentLoggedUser = currentLoggedUser;
@@ -62,6 +63,8 @@ public class MainWindowController implements Initializable {
         btnEditMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
 
         disableButtons();
+      //  FilteredList<Member> filteredMembers = new FilteredList<Member>(members, b->true);
+
     }
 
     @FXML
@@ -161,9 +164,54 @@ public class MainWindowController implements Initializable {
         btnEditMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
     }
     @FXML
-    private void onSearchMemberTxtFieldChange(){
-       // members.sort(txtFieldSearchName.getText().compareTo());
-        //FXCollections.sort(members,new MyComparator(txtFieldSearchName.getText()));
+    private void onSearchMemberTxtFieldChange(StringProperty observable, String oldValue, String newValue){
+        FilteredList<Member> filteredMembers = new FilteredList<Member>(members, b->true);
+        filteredMembers.setPredicate(member->{
+            if (newValue.isBlank() || newValue.isEmpty() || newValue == null)
+            {
+                return true;
+            }
+            String searchingKey = newValue.toUpperCase();
+            if (member.getFirstName().toUpperCase().indexOf(searchingKey) > -1|member.getLastName().toUpperCase().indexOf(searchingKey) > -1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        });
+        //Sorting the filtered list
+        SortedList<Member> sortedMembers = new SortedList<>(filteredMembers);
+        // binding the sorted members with table view
+        sortedMembers.comparatorProperty().bind(membersTableView.comparatorProperty());
+        membersTableView.setItems(sortedMembers);
     }
+    @FXML
+    private void onSearchItemTxtFieldChange(StringProperty observable, String oldValue, String newValue){
+        FilteredList<Book> filteredBooks = new FilteredList<Book>(bookList, b->true);
+        filteredBooks.setPredicate(book->{
+            if (newValue.isBlank() || newValue.isEmpty() || newValue == null)
+            {
+                return true;
+            }
+            String searchingKey = newValue.toUpperCase();
+            if (book.getName().toUpperCase().indexOf(searchingKey) > -1 |book.getAuthor().getLastName().toUpperCase().indexOf(searchingKey) > -1|book.getAuthor().getFirstName().toUpperCase().indexOf(searchingKey) > -1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        });
+        //Sorting the filtered list
+        SortedList<Book> sortedBooks = new SortedList<>(filteredBooks);
+        // binding the sorted members with table view
+        sortedBooks.comparatorProperty().bind(libraryItemTableView.comparatorProperty());
+        libraryItemTableView.setItems(sortedBooks);
+    }
+
+
 
 }

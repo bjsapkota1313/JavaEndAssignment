@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 
 
 public class AddMemberDialogueController {
@@ -34,12 +35,13 @@ public class AddMemberDialogueController {
     }
     private  void addMember (){
        try{
-           members.add( new Member(dateOfBirthPicker.getValue() == null
+           LocalDate dateOfBirth=dateOfBirthPicker.getValue() == null
                    ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                   : dateOfBirthPicker.getValue(),txtFieldFirstName.getText(),txtFieldLastName.getText(),getHighestIdentifier()));
+                   : dateOfBirthPicker.getValue();
+           members.add( new Member(dateOfBirth,txtFieldFirstName.getText(),txtFieldLastName.getText(),getHighestIdentifier()));
        }
-       catch(DateTimeParseException dateTimeParseException) {
-           lblError.setText("Invalid Date ");
+       catch(DateTimeParseException | InputMismatchException exep) {
+           lblError.setText(exep + "Check your Input and Try Again");
        }
     }
     @FXML
