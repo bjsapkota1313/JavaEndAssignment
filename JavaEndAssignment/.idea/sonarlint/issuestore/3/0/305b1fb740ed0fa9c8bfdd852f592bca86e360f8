@@ -12,4 +12,12 @@ h
 java:S1659)"MDeclare "txtFieldMemberId" and all following declarations on a separate line.(ένΘΛÿÿÿÿÿ
 4
 java:S2178H"Correct this "|" to "||".(υ£μ‚ωÿÿÿÿ
+
+java:S1130|"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(•Ρ“Ζώÿÿÿÿ8ƒ‚—¦Α0
+
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(ΨΏ8•‚—¦Α0
+
+java:S1130†"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(¤—ίκ8™‚—¦Α0
+
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(¨¨θψÿÿÿÿ8 ‚—¦Α0
 W	java:S125¥"<This block of commented-out lines of code should be removed.(¥±ϊÿÿÿÿ

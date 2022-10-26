@@ -62,7 +62,7 @@ public class Database {
         for (LentItem lentItem:lentItems
         ) {
             // looking in lending Item if the library Item is there or not
-            if(lentItem.getItem().getItemCode() == libraryItemCode){
+            if(lentItem.item().getItemCode() == libraryItemCode){
                 returningLentItem=lentItem;
             }
         }

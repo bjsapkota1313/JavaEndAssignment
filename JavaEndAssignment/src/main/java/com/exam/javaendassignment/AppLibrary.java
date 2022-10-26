@@ -31,8 +31,6 @@ public class AppLibrary extends Application {
     }
 
 
-
-
     @Override
     public void stop() throws IOException {
         // writing everything when application is stopped

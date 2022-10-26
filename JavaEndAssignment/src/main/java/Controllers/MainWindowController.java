@@ -89,17 +89,17 @@ public class MainWindowController implements Initializable {
             lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
             lblUserFeedBackReceivingItem.setText("The entered Item code is not lent or invalid item code");
         }else{
-            if (ChronoUnit.DAYS.between( receivingLentItem.getLendingDate(),LocalDate.now())>=21 ){
+            if (ChronoUnit.DAYS.between( receivingLentItem.lendingDate(),LocalDate.now())>=21 ){
                 lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
-                lblUserFeedBackReceivingItem.setText("This item is returned " + (ChronoUnit.DAYS.between( receivingLentItem.getLendingDate(),LocalDate.now()) - 21) + " days Late");
+                lblUserFeedBackReceivingItem.setText("This item is returned " + (ChronoUnit.DAYS.between( receivingLentItem.lendingDate(),LocalDate.now()) - 21) + " days Late");
                 // for now Not receiving a book whenever it later than 21 days  implementing fine can be adopted later on
             } else {
                 lblUserFeedBackReceivingItem.getStyleClass().add("successMessageStyle");
                 database.removeLentItem(receivingLentItem); // removing from LentItem list
-                database.updateLibraryItemAvailability(receivingLentItem.getItem().getItemCode(),Availability.Yes);
+                database.updateLibraryItemAvailability(receivingLentItem.item().getItemCode(),Availability.Yes);
                 libraryItemTableView.refresh();
                 // updates the library item to available again
-                lblUserFeedBackReceivingItem.setText(receivingLentItem.getItem().getName() +" is available again to Lend");
+                lblUserFeedBackReceivingItem.setText(receivingLentItem.item().getName() +" is available again to Lend");
             }
         }
     }
