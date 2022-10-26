@@ -1,13 +1,5 @@
 
 a	java:S112‡"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(º“¨úÿÿÿÿ
-o
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(²ò“È
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ƒéÔúÿÿÿÿÿ
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(°†Åêúÿÿÿÿ
 n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜€S
 f
 java:S2095y"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(ÿ˜÷†

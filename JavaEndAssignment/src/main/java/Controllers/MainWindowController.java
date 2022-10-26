@@ -2,7 +2,6 @@ package Controllers;
 
 import Database.Database;
 import Model.*;
-import com.exam.javaendassignment.AppLibrary;
 import com.exam.javaendassignment.SceneLoader;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.StringProperty;
@@ -10,15 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 
@@ -41,7 +38,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private Label lblUserName, lblUserFeedBackLendingItem,lblUserFeedBackReceivingItem;
     @FXML
-    private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode;
+    private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode,txtFieldSearchName;
     private User currentLoggedUser;
 
 
@@ -92,10 +89,10 @@ public class MainWindowController implements Initializable {
             lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
             lblUserFeedBackReceivingItem.setText("The entered Item code is not lent or invalid item code");
         }else{
-            if (Period.between(receivingLentItem.getLendingDate(), LocalDate.now()).getDays() >= 21) {
+            if (ChronoUnit.DAYS.between( receivingLentItem.getLendingDate(),LocalDate.now())>=21 ){
                 lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
-                lblUserFeedBackReceivingItem.setText("This item is returned " + (Period.between(receivingLentItem.getLendingDate(), LocalDate.now()).getDays() - 21) + " days");
-                // for now Not receiving a book whenever it later than 21 days fine can be adopted later on
+                lblUserFeedBackReceivingItem.setText("This item is returned " + (ChronoUnit.DAYS.between( receivingLentItem.getLendingDate(),LocalDate.now()) - 21) + " days Late");
+                // for now Not receiving a book whenever it later than 21 days  implementing fine can be adopted later on
             } else {
                 lblUserFeedBackReceivingItem.getStyleClass().add("successMessageStyle");
                 database.removeLentItem(receivingLentItem); // removing from LentItem list
@@ -162,6 +159,11 @@ public class MainWindowController implements Initializable {
         btnEditItem.disableProperty().bind(Bindings.isEmpty(libraryItemTableView.getSelectionModel().getSelectedItems()));
         btnDeleteMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
         btnEditMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
+    }
+    @FXML
+    private void onSearchMemberTxtFieldChange(){
+       // members.sort(txtFieldSearchName.getText().compareTo());
+        //FXCollections.sort(members,new MyComparator(txtFieldSearchName.getText()));
     }
 
 }

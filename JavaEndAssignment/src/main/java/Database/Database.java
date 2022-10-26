@@ -15,16 +15,16 @@ public class Database {
 
     public Database() {
         // lent items Records for lent item
-        lentItems= new ArrayList<LentItem>();
+        lentItems= new ArrayList<>();
 
         // library Items
-        books = new ArrayList<Book>();
+        books = new ArrayList<>();
 
         // members
-        members = new ArrayList<Member>();
+        members = new ArrayList<>();
 
         // users
-        users = new ArrayList<User>();
+        users = new ArrayList<>();
         users.add(new User("John","Sapkota","Admin@123"));
         users.add(new User("Amy","Jackson","Admin@1234"));
 
@@ -33,7 +33,7 @@ public class Database {
     public void createAndAddMembersToTheList() {
         Member memberPiet= new Member(LocalDate.of(2000,06,21),"Piet"," de Vries",32);
         Member memberBijay= new Member(LocalDate.of(2001,10,26),"Bijay","Sapkota",33);
-        Member memberDaniel= new Member(LocalDate.of(1990,10,05),"Daniel","de Vries",34);
+        Member memberDaniel= new Member(LocalDate.of(1990,10,5),"Daniel","de Vries",34);
         members.add(memberPiet);
         members.add(memberDaniel);
         members.add(memberBijay);
@@ -120,7 +120,7 @@ public class Database {
         OutputStream outputStream  = new FileOutputStream(file);
         ObjectOutputStream objectStream=new ObjectOutputStream(outputStream);
         objectStream.writeObject(list);
-        objectStream.flush();
+        objectStream.flush(); // flushing
         //closing the stream
         objectStream.close();
     }

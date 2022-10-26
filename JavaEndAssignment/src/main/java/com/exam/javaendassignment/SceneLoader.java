@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SceneLoader {
-    public void loadScene(String name, Object controller,Stage window ,boolean isDialogBox) throws IOException{
+    public void loadScene(String name, Object controller,Stage window ,boolean isDialogBox) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource(name+".fxml"));
             fxmlLoader.setController(controller);

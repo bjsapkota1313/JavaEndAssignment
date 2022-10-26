@@ -1,27 +1,26 @@
 package com.exam.javaendassignment;
 
 import Controllers.LoginViewController;
-import Controllers.MainWindowController;
 import Database.Database;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 
 public class AppLibrary extends Application {
-    private Database database;
+    private final Database database;
     private final File membersFile;
     private final File booksFile;
     private final File lentItemsFile;
     public static void main(String[] args) {
     launch();
 }
-    public AppLibrary() throws FileNotFoundException {
+    public AppLibrary() {
         database=new Database();
-        membersFile = new File("src//Members.txt");
+       membersFile = new File("src//Members.txt");
         booksFile= new File("src//Books.txt");
         lentItemsFile= new File("src//LentItems.txt");
         insertDataOnDatabase();
@@ -30,17 +29,7 @@ public class AppLibrary extends Application {
     public void start(Stage stage) throws IOException {
         new SceneLoader().loadScene("LoginView",new LoginViewController(database),stage,false);
     }
-   /* @Override
-    public void start(Stage stage) throws IOException {
-       FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource("LoginView.fxml"));
-       fxmlLoader.setController(new LoginViewController(database));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Login");
-        scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-    }
-    */
+
 
 
 
