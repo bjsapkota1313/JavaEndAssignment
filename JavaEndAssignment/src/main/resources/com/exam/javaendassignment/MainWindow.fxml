@@ -17,7 +17,7 @@
             </Label>
             <ImageView fitHeight="43.0" fitWidth="65.0" layoutX="41.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../ico.png" />
+                  <Image url="@../../../../../img/ico.png" />
                </image>
             </ImageView>
          </children>
@@ -60,7 +60,7 @@
                         <Button fx:id="btnAddMember" layoutX="991.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnAddAddMemberClicked" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add Member" />
                         <Button fx:id="btnEditMember" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnEditMemberClicked" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit Member" />
                         <Button fx:id="btnDeleteMember" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnDeleteMemberClicked" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete Member" />
-                        <TextField  alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" onTextChange="#onSearchMemberTxtFieldChange" prefHeight="25.0" prefWidth="301.0" promptText="Search Members" />
+                        <TextField alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" onTextChange="#onSearchMemberTxtFieldChange" prefHeight="25.0" prefWidth="301.0" promptText="Search Members" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -100,7 +100,7 @@
                         <Button fx:id="btnAddItem" layoutX="991.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnAddItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="blueWhiteButton" text="Add item" />
                         <Button fx:id="btnEditItem" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnEditItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit item" />
                         <Button fx:id="btnDeleteItem" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnDeleteItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete item" />
-                      <TextField  alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" onTextChange="#onSearchItemTxtFieldChange" prefHeight="25.0" prefWidth="301.0" promptText="Search Library Items" />
+                      <TextField alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" onTextChange="#onSearchItemTxtFieldChange" prefHeight="25.0" prefWidth="301.0" promptText="Search Library Items" />
                   </children></AnchorPane>
             </content>
           </Tab>
@@ -120,7 +120,7 @@
                                     <TextField fx:id="txtFieldItemCode" layoutX="91.0" layoutY="72.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onItemCodeChange" prefHeight="25.0" prefWidth="327.0" promptText="Item code" />
                                     <TextField fx:id="txtFieldMemberId" layoutX="93.0" layoutY="123.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onMemberIDChange" prefHeight="25.0" prefWidth="326.0" promptText="Member Identifier" />
                                     <Button fx:id="btnLendItem" layoutX="301.0" layoutY="166.0" mnemonicParsing="false" onAction="#onBtnLendItemClicked" prefHeight="25.0" prefWidth="118.0" styleClass="blueWhiteButton" text="Lend Item" />
-                                    <Label fx:id="lblUserFeedBackLendingItem" layoutX="39.0" layoutY="216.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="394.0">
+                                    <Label fx:id="lblUserFeedBackLendingItem" styleClass="errorMessageStyle" layoutX="39.0" layoutY="216.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="394.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

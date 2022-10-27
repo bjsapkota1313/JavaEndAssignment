@@ -1,21 +1,19 @@
 package Controllers;
 
+import Model.Exception.EmptyFieldException;
 import Model.Member;
+import com.exam.javaendassignment.CloserAndLoader.StageCloser;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.InputMismatchException;
 
 
 public class AddMemberDialogueController {
@@ -31,30 +29,33 @@ public class AddMemberDialogueController {
         this.members = members;
     }
     private int getHighestIdentifier(){
-        return Collections.max(members, Comparator.comparing(s -> s.getIdentifier())).getIdentifier()+1; // getting the member having the highest id and then adding 1 into it
-    }
-    private  void addMember (){
-       try{
-           LocalDate dateOfBirth=dateOfBirthPicker.getValue() == null
-                   ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                   : dateOfBirthPicker.getValue();
-           members.add( new Member(dateOfBirth,txtFieldFirstName.getText(),txtFieldLastName.getText(),getHighestIdentifier()));
-       }
-       catch(DateTimeParseException | InputMismatchException exep) {
-           lblError.setText(exep + "Check your Input and Try Again");
-       }
+        return Collections.max(members, Comparator.comparing(Member::getIdentifier)).getIdentifier()+1; // getting the member having the highest id and then adding 1 into it
     }
     @FXML
     private void onBtnAddMemberClicked(ActionEvent event){
-        addMember();
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
-
-
+        try{
+            members.add( new Member(dateOfBirthPicker.getValue() == null
+                    ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                    : dateOfBirthPicker.getValue(),getTextFieldText(txtFieldFirstName),getTextFieldText(txtFieldFirstName),getHighestIdentifier()));
+            new StageCloser().closeStageByEvent(event);
+        }
+        catch(DateTimeParseException  | EmptyFieldException exp) {
+            if(exp instanceof DateTimeParseException){
+                lblError.setText("Error Parsing " + dateOfBirthPicker.getEditor().getText() + "Into Date");
+            } else {
+                lblError.setText(exp.getMessage());
+            }
+            event.consume();
+        }
     }
     @FXML
     private void onBtnAddMemberCancelClicked(ActionEvent event){
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
+        new StageCloser().closeStageByEvent(event);
+    }
+    private String getTextFieldText(TextField textField){
+        if(!textField.getText().isEmpty()){
+            return textField.getText();
+        }
+       throw new EmptyFieldException( textField.getPromptText() + " Field  is Empty");
     }
 }

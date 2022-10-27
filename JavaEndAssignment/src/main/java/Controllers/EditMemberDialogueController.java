@@ -1,20 +1,19 @@
 package Controllers;
 
+import Model.Exception.EmptyFieldException;
 import Model.Member;
+import com.exam.javaendassignment.CloserAndLoader.StageCloser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 public class EditMemberDialogueController implements Initializable {
@@ -22,7 +21,7 @@ public class EditMemberDialogueController implements Initializable {
     private TextField txtFieldFirstName,txtFieldLastName;
     @FXML
     private DatePicker dateOfBirthPicker;
-    private Member selectedMember;
+    private final Member selectedMember;
     @FXML
     private Label lblError;
 
@@ -32,14 +31,28 @@ public class EditMemberDialogueController implements Initializable {
 
     @FXML
     private void onBtnUpdateMemberClicked(ActionEvent event) {
-        updateMemberDetails();
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
+        try{
+            selectedMember.setFirstName(getTextFieldText(txtFieldFirstName));
+            selectedMember.setLastName(getTextFieldText(txtFieldLastName));
+            LocalDate dateOfBirth=dateOfBirthPicker.getValue() == null
+                    ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                    : dateOfBirthPicker.getValue();
+            selectedMember.setDateOfBirth(dateOfBirth);
+            // closing the dialogue
+            new StageCloser().closeStageByEvent(event);
+        }
+        catch(DateTimeParseException  | EmptyFieldException exp) {
+            if(exp instanceof DateTimeParseException){
+                lblError.setText("Error Parsing " + dateOfBirthPicker.getEditor().getText() + "Into Date");
+            } else {
+                lblError.setText(exp.getMessage());
+            }
+            event.consume();
+        }
     }
     @FXML
     private void onBtnCancelClicked(ActionEvent event) {
-    Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-    stage.close();
+        new StageCloser().closeStageByEvent(event);
     }
 
     @Override
@@ -51,20 +64,12 @@ public class EditMemberDialogueController implements Initializable {
         txtFieldLastName.setPromptText(selectedMember.getLastName());
         dateOfBirthPicker.setPromptText(selectedMember.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
-    private void updateMemberDetails() {
-
-        try{
-            selectedMember.setFirstName(txtFieldFirstName.getText());
-            selectedMember.setLastName(txtFieldLastName.getText());
-            LocalDate dateOfBirth=dateOfBirthPicker.getValue() == null
-                    ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                    : dateOfBirthPicker.getValue();
-            selectedMember.setDateOfBirth(dateOfBirth);
+    private String getTextFieldText(TextField textField){
+        if(!textField.getText().isEmpty()){
+            return textField.getText();
         }
-        catch (InputMismatchException | DateTimeParseException exep) {
-            lblError.setText(exep + "Check your Input and Try Again");
-        }
-
-
+        throw new EmptyFieldException(" Field cannot be left empty while editing Member Details");
     }
+
+
 }

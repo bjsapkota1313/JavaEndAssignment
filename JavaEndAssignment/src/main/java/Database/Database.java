@@ -1,6 +1,7 @@
 package Database;
 
 import Model.*;
+import Model.Exception.ResultNotFoundException;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public class Database {
         // users
         users = new ArrayList<>();
         users.add(new User("John","Sapkota","Admin@123"));
-        users.add(new User("Amy","Jackson","Admin@1234"));
+        users.add(new User("Durga","Jackson","Admin@123"));
 
     }
 
@@ -58,18 +59,16 @@ public class Database {
         lentItems.remove(lentItem);
     }
     public LentItem getLentItemWithItemCode(int libraryItemCode){
-        LentItem returningLentItem=null;
         for (LentItem lentItem:lentItems
         ) {
             // looking in lending Item if the library Item is there or not
             if(lentItem.item().getItemCode() == libraryItemCode){
-                returningLentItem=lentItem;
+                return lentItem;
             }
         }
-        return returningLentItem;
+        throw  new ResultNotFoundException("No Item was lent with this item Code " + libraryItemCode);
     }
     public  List<Book> getLibraryBooks(){
-
         return books;
     }
     public void setMembersFromSerializedFile(File file) {
@@ -82,39 +81,34 @@ public class Database {
         lentItems= (List<LentItem>)(List<?>)readSerializableList(file);
     }
     public LibraryItem getLibraryItemWithItemCode(int libraryItemCode){
-        LibraryItem returningLibraryItem=null;
         for (LibraryItem libraryItem : books
         ) {
             if(libraryItem.getItemCode() == libraryItemCode){
-                returningLibraryItem=libraryItem;
+              return libraryItem;
             }
         }
-        return returningLibraryItem;
+       throw  new ResultNotFoundException("No Item was found with code " + libraryItemCode);
     }
     public List<Member> getMembers() {
-
         return members;
     }
     public Member getMemberById(int identifier) {
-        Member returningMember = null;
         for (Member member : members) {
             if (member.getIdentifier() == identifier) {
-                returningMember= member;
+                return member;
             }
         }
-        return returningMember;
+        throw new ResultNotFoundException("No Member have been found with Id "+identifier);
     }
-    public User loginWithCredentials(String username, String password){
-        User loggingUser=null;
+    public User loginWithCredentials(String username, String password) {
         for (User user : users
         ) {
             if (user.getUserName().equals(username) && user.getPassword().equals(password))
             {
-                 loggingUser= user;
+                 return user;
             }
-
         }
-        return loggingUser;
+        throw  new ResultNotFoundException("Invalid username or password combination");
     }
     public void writeSerializable(File file,List<Serializable> list) throws IOException {
         OutputStream outputStream  = new FileOutputStream(file);
@@ -125,7 +119,7 @@ public class Database {
         objectStream.close();
     }
     private List<Serializable> readSerializableList(File file){
-        List<Serializable> readingList = new ArrayList<>();
+        List<Serializable> readingList ;
         try {
             ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(file));
             readingList=(List<Serializable>) objectInputStream.readObject();

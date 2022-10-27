@@ -1,13 +1,12 @@
 package Controllers;
 
 import Database.Database;
+import Model.Exception.EmptyFieldException;
+import Model.Exception.ResultNotFoundException;
 import Model.User;
-import com.exam.javaendassignment.AppLibrary;
-import com.exam.javaendassignment.SceneLoader;
+import com.exam.javaendassignment.CloserAndLoader.SceneLoader;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -23,7 +22,6 @@ public class LoginViewController {
     @FXML
     public AnchorPane anchorPane;
     private  final Database database;
-    private  User loggedUser;
 
     private  final int SET_DIGIT_BIT = 0b100;
     private  final int SET_LETTER_BIT = 0b010;
@@ -41,11 +39,12 @@ public class LoginViewController {
 
     @FXML
     protected void onLoginButtonClicked() throws IOException {
-         loggedUser=database.loginWithCredentials(txtFieldUserName.getText(), pswdFieldPassword.getText());
-        if(loggedUser==null){
-            lblDisplayError.setText("Invalid username or password combination");}
-        else {
-            new SceneLoader().loadScene("MainWindow",new MainWindowController(database,loggedUser),(Stage) anchorPane.getScene().getWindow(),false); // Displaying Main window
+        try {
+            User loggedUser = database.loginWithCredentials( getTextFieldText(txtFieldUserName), pswdFieldPassword.getText());
+            new SceneLoader().loadScene("MainWindow",new MainWindowController(database, loggedUser),(Stage) anchorPane.getScene().getWindow(),false); // Displaying Main window
+        }
+        catch (ResultNotFoundException | EmptyFieldException exp) {
+            lblDisplayError.setText(exp.getMessage());
         }
 
     }
@@ -71,6 +70,13 @@ public class LoginViewController {
     @FXML
     private void onTextFieldUsernameChanged(StringProperty observable, String oldValue, String newValue){
         lblDisplayError.setText("");
+        lblDisplayError.getStyleClass().clear();
+    }
+    private String getTextFieldText(TextField textField){
+        if(!textField.getText().isEmpty()){
+            return textField.getText();
+        }
+        throw new EmptyFieldException( "Username must be entered inorder to login ");
     }
 
 

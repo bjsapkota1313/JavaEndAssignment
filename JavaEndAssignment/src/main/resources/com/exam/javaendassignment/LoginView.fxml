@@ -14,7 +14,7 @@
         </Label>
         <TextField fx:id="txtFieldUserName" onTextChange="#onTextFieldUsernameChanged" layoutX="33.0" layoutY="83.0" prefHeight="25.0" prefWidth="243.0" promptText="User Name" style="-fx-border-color: #303234;" />
         <PasswordField fx:id="pswdFieldPassword" layoutX="33.0" layoutY="126.0" onTextChange="#onPasswordTextChange" prefHeight="25.0" prefWidth="243.0" promptText="Password" style="-fx-border-style: solid; -fx-border-color: #454545;" />
-        <Button fx:id="btnLogin" disable="true" layoutX="33.0" layoutY="163.0" mnemonicParsing="false" onAction="#onLoginButtonClicked" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: blue;" text="Login">
+        <Button fx:id="btnLogin" styleClass="blueWhiteButton" disable="true" layoutX="33.0" layoutY="163.0" mnemonicParsing="false" onAction="#onLoginButtonClicked" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: blue;" text="Login">
             <textFill>
                 <LinearGradient endX="1.0" endY="1.0">
                     <stops>
@@ -31,7 +31,7 @@
                     </stops>
                 </LinearGradient>
             </textFill></Button>
-      <Label fx:id="lblDisplayError" layoutX="144.0" layoutY="167.0" prefHeight="17.0" prefWidth="207.0" textFill="RED">
+      <Label fx:id="lblDisplayError" styleClass="errorMessageStyle" layoutX="144.0" layoutY="167.0" prefHeight="17.0" prefWidth="207.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font></Label>

@@ -2,6 +2,7 @@ package com.exam.javaendassignment;
 
 import Controllers.LoginViewController;
 import Database.Database;
+import com.exam.javaendassignment.CloserAndLoader.SceneLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.File;
@@ -20,40 +21,34 @@ public class AppLibrary extends Application {
 }
     public AppLibrary() {
         database=new Database();
-       membersFile = new File("src//Members.txt");
+        membersFile = new File("src//Members.txt");
         booksFile= new File("src//Books.txt");
         lentItemsFile= new File("src//LentItems.txt");
         insertDataOnDatabase();
     }
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage)  {
         new SceneLoader().loadScene("LoginView",new LoginViewController(database),stage,false);
     }
-
-
     @Override
     public void stop() throws IOException {
         // writing everything when application is stopped
-        if(!database.getMembers().isEmpty()){
-            database.writeSerializable(membersFile,(List<Serializable>)(List<?>) database.getMembers());
-        }
-        if(!database.getLibraryBooks().isEmpty()) {
-            database.writeSerializable(booksFile,(List<Serializable>)(List<?>) database.getLibraryBooks());
-        }
-        if(!database.getLentItems().isEmpty()) {
-            database.writeSerializable(lentItemsFile,(List<Serializable>)(List<?>) database.getLentItems());
-        }
+        database.writeSerializable(membersFile,(List<Serializable>)(List<?>) database.getMembers());
+        database.writeSerializable(booksFile,(List<Serializable>)(List<?>) database.getLibraryBooks());
+        database.writeSerializable(lentItemsFile,(List<Serializable>)(List<?>) database.getLentItems());
+
     }
-    private void insertDataOnDatabase(){
+    private void insertDataOnDatabase() {
+        ///as file is not found HardCode data will be created if not created it will throw error while getting HighestI d from List
         // members file
-        if(membersFile.exists() ) {
+       if(membersFile.exists() ) {
             database.setMembersFromSerializedFile(membersFile);
         }
         else {
-            database.createAndAddMembersToTheList();
+           database.createAndAddMembersToTheList();
         }
         // books file
-        if(booksFile.exists() ) {
+        if(booksFile.exists()) {
             database.setBooksFromSerializedFile(booksFile);
         }
         else{
@@ -63,7 +58,8 @@ public class AppLibrary extends Application {
         if (lentItemsFile.exists()){
             database.setLentItemsFromSerializedFile(lentItemsFile);
         }
-            // no files will be lent
+        // no files will be lent ad default
+
     }
 
 }

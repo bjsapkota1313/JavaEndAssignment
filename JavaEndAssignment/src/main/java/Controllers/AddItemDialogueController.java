@@ -1,42 +1,52 @@
 package Controllers;
 
-import Model.Author;
-import Model.Availability;
-import Model.Book;
+import Model.*;
+import Model.Exception.EmptyFieldException;
+import com.exam.javaendassignment.CloserAndLoader.StageCloser;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+
 import java.util.Collections;
 import java.util.Comparator;
 
 public class AddItemDialogueController {
     @FXML
     private TextField txtFieldItemTitle,txtFieldAuthorFirstName,txtFieldAuthorLastName;
-    private ObservableList<Book> bookList;
+    @FXML
+    private Label lblError;
+    private final ObservableList<Book> bookList;
 
     public AddItemDialogueController(ObservableList<Book> bookList) {
         this.bookList = bookList;
     }
     @FXML
     public void onBtnAddItemClicked(ActionEvent event) {
-        addItem();
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
+        try {
+            // when ever new book is added , it is available to lend
+            bookList.add(new Book(getTextFieldText( txtFieldItemTitle),getHighestItemCode(), Availability.Yes,new Author(getTextFieldText(txtFieldAuthorFirstName) , getTextFieldText(txtFieldAuthorLastName))));
+            new StageCloser().closeStageByEvent(event);
+        }
+        catch (EmptyFieldException exp) {
+            lblError.setText(exp.getMessage());
+        }
     }
     @FXML
     public void onBtnCancelClicked(ActionEvent event) {
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
+        new StageCloser().closeStageByEvent(event);
     }
     private int getHighestItemCode(){
-        return Collections.max(bookList, Comparator.comparing(s -> s.getItemCode())).getItemCode()+1; // getting the member having highest item code in booklist and then adding 1 into it
+        return Collections.max(bookList, Comparator.comparing(LibraryItem::getItemCode)).getItemCode()+1; // getting the member having the highest item code in booklist and then adding 1 into it
     }
-    private void addItem(){
-        // when ever new book is added , it is available to lend
-        bookList.add(new Book(txtFieldItemTitle.getText(),getHighestItemCode(), Availability.Yes,new Author(txtFieldAuthorFirstName.getText(),txtFieldAuthorLastName.getText())));
+
+    private String getTextFieldText(TextField textField){
+        if(!textField.getText().isEmpty()){
+            return textField.getText();
+        }
+        throw new EmptyFieldException( textField.getPromptText() + " Field  is empty");
     }
+
 
 }

@@ -10,7 +10,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <TextField fx:id="txtFieldFirstName" layoutX="27.0" layoutY="77.0" prefHeight="25.0" prefWidth="268.0" promptText="first Name" />
+      <TextField fx:id="txtFieldFirstName" layoutX="27.0" layoutY="77.0" prefHeight="25.0" prefWidth="268.0" promptText="First Name" />
       <TextField fx:id="txtFieldLastName" layoutX="27.0" layoutY="145.0" prefHeight="25.0" prefWidth="268.0" promptText="Last Name" />
       <DatePicker fx:id="dateOfBirthPicker" layoutX="333.0" layoutY="77.0" prefHeight="25.0" prefWidth="196.0" promptText="dd-mm-yyyy"/>
       <Button  onAction="#onBtnAddMemberClicked" layoutX="27.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" styleClass="blueWhiteButton" text="Add Member" />

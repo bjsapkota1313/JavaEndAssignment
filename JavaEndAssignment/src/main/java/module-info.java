@@ -8,5 +8,8 @@
     exports Controllers;
     exports Model;
     opens Controllers to javafx.fxml;
+        exports com.exam.javaendassignment.CloserAndLoader;
+        opens com.exam.javaendassignment.CloserAndLoader to javafx.fxml;
+        exports Model.Exception;
 
-}
+    }

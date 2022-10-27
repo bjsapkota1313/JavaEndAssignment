@@ -1,20 +1,19 @@
 package Controllers;
-
 import Database.Database;
 import Model.*;
-import com.exam.javaendassignment.SceneLoader;
+import Model.Exception.EmptyFieldException;
+import Model.Exception.ResultNotFoundException;
+import com.exam.javaendassignment.CloserAndLoader.SceneLoader;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -41,7 +40,7 @@ public class MainWindowController implements Initializable {
     private Label lblUserName, lblUserFeedBackLendingItem,lblUserFeedBackReceivingItem;
     @FXML
     private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode;
-    private User currentLoggedUser;
+    private final User currentLoggedUser;
 
     public MainWindowController( Database database,User currentLoggedUser) {
         this.currentLoggedUser = currentLoggedUser;
@@ -62,36 +61,34 @@ public class MainWindowController implements Initializable {
         membersTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         btnEditMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
 
-        disableButtons();
-      //  FilteredList<Member> filteredMembers = new FilteredList<Member>(members, b->true);
-
+        disableButtons(); // disabling button when nothing is selecting in index
     }
 
     @FXML
     protected void onBtnLendItemClicked() {
-        LibraryItem lendingLibraryItem = database.getLibraryItemWithItemCode(Integer.parseInt(txtFieldItemCode.getText()));
-        Member lendingMember = database.getMemberById(Integer.parseInt(txtFieldMemberId.getText()));
-
-        if (lendingLibraryItem == null | lendingMember == null) {
-            lblUserFeedBackLendingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
-            lblUserFeedBackLendingItem.setText("Please check your Item code or Member Id and try again");
-        } else {
+        try {
+            LibraryItem lendingLibraryItem = database.getLibraryItemWithItemCode(Integer.parseInt(getTextFieldText(txtFieldItemCode)));
+            Member lendingMember = database.getMemberById(Integer.parseInt( getTextFieldText(txtFieldMemberId)));
             // when Some libraryItem is lent to the member new lentItem object is made
             database.addLentItem(new LentItem(lendingLibraryItem, lendingMember, LocalDate.now()));
             lblUserFeedBackLendingItem.getStyleClass().add("successMessageStyle");
             lblUserFeedBackLendingItem.setText("The " + lendingLibraryItem.getName() + " has been lent to " + lendingMember);
-           database.updateLibraryItemAvailability(lendingLibraryItem.getItemCode(),Availability.No); // updating lending item availability status
+            database.updateLibraryItemAvailability(lendingLibraryItem.getItemCode(),Availability.No); // updating lending item availability status
             libraryItemTableView.refresh();
+        }catch (ResultNotFoundException | NumberFormatException | EmptyFieldException exp) {
+            lblUserFeedBackLendingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
+           if(exp instanceof NumberFormatException){
+               lblUserFeedBackLendingItem.setText("Cannot Parse entered value");
+           } else  {
+               lblUserFeedBackLendingItem.setText(exp.getMessage());
+           }
         }
     }
 
     @FXML
     protected void onBtnReceiveItemClicked() {
-        LentItem receivingLentItem = database.getLentItemWithItemCode(Integer.parseInt(txtBoxReceiveItemCode.getText()));
-        if (receivingLentItem == null) {
-            lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
-            lblUserFeedBackReceivingItem.setText("The entered Item code is not lent or invalid item code");
-        }else{
+        try {
+            LentItem receivingLentItem = database.getLentItemWithItemCode(Integer.parseInt( getTextFieldText(txtBoxReceiveItemCode)));
             if (ChronoUnit.DAYS.between( receivingLentItem.lendingDate(),LocalDate.now())>=21 ){
                 lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
                 lblUserFeedBackReceivingItem.setText("This item is returned " + (ChronoUnit.DAYS.between( receivingLentItem.lendingDate(),LocalDate.now()) - 21) + " days Late");
@@ -103,6 +100,14 @@ public class MainWindowController implements Initializable {
                 libraryItemTableView.refresh();
                 // updates the library item to available again
                 lblUserFeedBackReceivingItem.setText(receivingLentItem.item().getName() +" is available again to Lend");
+            }
+        }
+        catch (ResultNotFoundException |NumberFormatException | EmptyFieldException exp) {
+            lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
+            if(exp instanceof NumberFormatException){
+                lblUserFeedBackReceivingItem.setText("Cannot Parse entered value");
+            } else{
+                lblUserFeedBackReceivingItem.setText(exp.getMessage());
             }
         }
     }
@@ -124,23 +129,23 @@ public class MainWindowController implements Initializable {
         lblUserFeedBackReceivingItem.setText("");
     }
     @FXML
-    private void onBtnAddAddMemberClicked(ActionEvent event) throws IOException {
+    private void onBtnAddAddMemberClicked() {
         new SceneLoader().loadScene("AddMember",new AddMemberDialogueController(members),new Stage(),true);
         membersTableView.getSelectionModel().clearSelection();
     }
     @FXML
-    private void  onBtnAddItemClicked() throws IOException {
+    private void  onBtnAddItemClicked()  {
         new SceneLoader().loadScene("AddLibraryItem",new AddItemDialogueController(bookList),new Stage(),true);
         libraryItemTableView.getSelectionModel().clearSelection();
     }
     @FXML
-    private void onBtnEditItemClicked() throws IOException {
+    private void onBtnEditItemClicked()  {
         new SceneLoader().loadScene("EditLibraryItem",new EditItemDialogueController(libraryItemTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
         libraryItemTableView.refresh(); // refreshing table view whenever it is updated in observable list
         libraryItemTableView.getSelectionModel().clearSelection();
     }
     @FXML
-    private void onBtnEditMemberClicked() throws IOException {
+    private void onBtnEditMemberClicked()  {
         new SceneLoader().loadScene("EditMember",new EditMemberDialogueController(membersTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
         membersTableView.refresh(); // refreshing table view whenever it is updated in
         membersTableView.getSelectionModel().clearSelection(); // clearing selection
@@ -165,21 +170,14 @@ public class MainWindowController implements Initializable {
     }
     @FXML
     private void onSearchMemberTxtFieldChange(StringProperty observable, String oldValue, String newValue){
-        FilteredList<Member> filteredMembers = new FilteredList<Member>(members, b->true);
+        FilteredList<Member> filteredMembers = new FilteredList<>(members, b->true);
         filteredMembers.setPredicate(member->{
-            if (newValue.isBlank() || newValue.isEmpty() || newValue == null)
+            if (newValue.isBlank() || newValue.isEmpty())
             {
                 return true;
             }
             String searchingKey = newValue.toUpperCase();
-            if (member.getFirstName().toUpperCase().indexOf(searchingKey) > -1|member.getLastName().toUpperCase().indexOf(searchingKey) > -1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return member.getFirstName().toUpperCase().contains(searchingKey) || member.getLastName().toUpperCase().contains(searchingKey);
         });
         //Sorting the filtered list
         SortedList<Member> sortedMembers = new SortedList<>(filteredMembers);
@@ -189,29 +187,25 @@ public class MainWindowController implements Initializable {
     }
     @FXML
     private void onSearchItemTxtFieldChange(StringProperty observable, String oldValue, String newValue){
-        FilteredList<Book> filteredBooks = new FilteredList<Book>(bookList, b->true);
+        FilteredList<Book> filteredBooks = new FilteredList<>(bookList, b->true);
         filteredBooks.setPredicate(book->{
-            if (newValue.isBlank() || newValue.isEmpty() || newValue == null)
+            if (newValue.isBlank() || newValue.isEmpty())
             {
                 return true;
             }
             String searchingKey = newValue.toUpperCase();
-            if (book.getName().toUpperCase().indexOf(searchingKey) > -1 |book.getAuthor().getLastName().toUpperCase().indexOf(searchingKey) > -1|book.getAuthor().getFirstName().toUpperCase().indexOf(searchingKey) > -1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return book.getName().toUpperCase().contains(searchingKey) || book.getAuthor().getLastName().toUpperCase().contains(searchingKey) || book.getAuthor().getFirstName().toUpperCase().contains(searchingKey);
         });
         //Sorting the filtered list
         SortedList<Book> sortedBooks = new SortedList<>(filteredBooks);
-        // binding the sorted members with table view
+        // binding the sorted Books with table view
         sortedBooks.comparatorProperty().bind(libraryItemTableView.comparatorProperty());
         libraryItemTableView.setItems(sortedBooks);
     }
-
-
-
+    private String getTextFieldText(TextField textField){
+        if(!textField.getText().isEmpty()){
+            return textField.getText();
+        }
+        throw new EmptyFieldException(textField.getPromptText() + " cannot be empty");
+    }
 }
