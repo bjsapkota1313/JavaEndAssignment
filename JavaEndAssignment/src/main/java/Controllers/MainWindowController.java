@@ -78,7 +78,7 @@ public class MainWindowController implements Initializable {
         }catch (ResultNotFoundException | NumberFormatException | EmptyFieldException exp) {
             lblUserFeedBackLendingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
            if(exp instanceof NumberFormatException){
-               lblUserFeedBackLendingItem.setText("Cannot Parse entered value");
+               lblUserFeedBackLendingItem.setText("Cannot Parse entered value into Id");
            } else  {
                lblUserFeedBackLendingItem.setText(exp.getMessage());
            }
@@ -105,7 +105,7 @@ public class MainWindowController implements Initializable {
         catch (ResultNotFoundException |NumberFormatException | EmptyFieldException exp) {
             lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
             if(exp instanceof NumberFormatException){
-                lblUserFeedBackReceivingItem.setText("Cannot Parse entered value");
+                lblUserFeedBackReceivingItem.setText("Cannot Parse entered value into Item code");
             } else{
                 lblUserFeedBackReceivingItem.setText(exp.getMessage());
             }

@@ -34,22 +34,23 @@ public class AddMemberDialogueController {
     @FXML
     private void onBtnAddMemberClicked(ActionEvent event){
         try{
-            members.add( new Member(dateOfBirthPicker.getValue() == null
+            members.add( new Member( dateOfBirthPicker.getValue() == null
                     ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                    : dateOfBirthPicker.getValue(),getTextFieldText(txtFieldFirstName),getTextFieldText(txtFieldFirstName),getHighestIdentifier()));
+                    : dateOfBirthPicker.getValue()
+                   ,getTextFieldText(txtFieldFirstName),getTextFieldText(txtFieldFirstName),getHighestIdentifier()));
             new StageCloser().closeStageByEvent(event);
         }
         catch(DateTimeParseException  | EmptyFieldException exp) {
             if(exp instanceof DateTimeParseException){
                 lblError.setText("Error Parsing " + dateOfBirthPicker.getEditor().getText() + "Into Date");
+                event.consume();
             } else {
                 lblError.setText(exp.getMessage());
             }
-            event.consume();
         }
     }
     @FXML
-    private void onBtnAddMemberCancelClicked(ActionEvent event){
+    private void onBtnCancelClicked(ActionEvent event){
         new StageCloser().closeStageByEvent(event);
     }
     private String getTextFieldText(TextField textField){

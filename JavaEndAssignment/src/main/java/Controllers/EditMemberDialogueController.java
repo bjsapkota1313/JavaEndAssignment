@@ -4,12 +4,12 @@ import Model.Exception.EmptyFieldException;
 import Model.Member;
 import com.exam.javaendassignment.CloserAndLoader.StageCloser;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,15 +43,15 @@ public class EditMemberDialogueController implements Initializable {
         }
         catch(DateTimeParseException  | EmptyFieldException exp) {
             if(exp instanceof DateTimeParseException){
-                lblError.setText("Error Parsing " + dateOfBirthPicker.getEditor().getText() + "Into Date");
+                lblError.setText("Error Parsing " + dateOfBirthPicker.getEditor().getText() + " Into Date");
+                event.consume();
             } else {
                 lblError.setText(exp.getMessage());
             }
-            event.consume();
         }
     }
     @FXML
-    private void onBtnCancelClicked(ActionEvent event) {
+    private void onBtnCancelClicked(Event event) {
         new StageCloser().closeStageByEvent(event);
     }
 

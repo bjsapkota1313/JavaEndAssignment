@@ -14,7 +14,7 @@
       <TextField fx:id="txtFieldLastName" layoutX="27.0" layoutY="145.0" prefHeight="25.0" prefWidth="268.0" promptText="Last Name" />
       <DatePicker fx:id="dateOfBirthPicker" layoutX="333.0" layoutY="77.0" prefHeight="25.0" prefWidth="196.0" promptText="dd-mm-yyyy"/>
       <Button  onAction="#onBtnAddMemberClicked" layoutX="27.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" styleClass="blueWhiteButton" text="Add Member" />
-      <Button onAction="#onBtnAddMemberCancelClicked" layoutX="143.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" styleClass="steelWhiteButton" text="Cancel" />
+      <Button onAction="#onBtnCancelClicked" layoutX="143.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" styleClass="steelWhiteButton" text="Cancel" />
       <Label fx:id="lblError" layoutX="27.0" layoutY="180.0" prefHeight="17.0" prefWidth="161.0" text="" styleClass="errorMessageStyle" />
    </children>
 </AnchorPane>
