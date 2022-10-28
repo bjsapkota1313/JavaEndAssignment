@@ -8,8 +8,6 @@
 mvnw,5\d\5d837c4ed85ecaaf932c506e80ff5d7b9f3d590d
 O
 src/main/java/Model/Author.java,b\1\b1e67ab85af221b090d05149c6276462bd4a6219
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 N
@@ -37,11 +35,7 @@ $src/main/java/Database/Database.java,3\4\346f01a89f8acac5ce6dbde3595e79fd81d4b
 M
 src/main/java/Model/Book.java,9\1\911c085c61193e10a284b386e73e00b44b8844a6
 h
-8src/main/java/com/exam/javaendassignment/AppLibrary.java,5\c\5cdaa2206ea9ed436ed00b9b5e9ce7fddd05ff50
-h
 8src/main/java/Controllers/AddItemDialogueController.java,2\b\2bec12500168175130ed617e947c16ed37c2b9d3
-i
-9src/main/java/Controllers/EditItemDialogueController.java,5\4\548757996f005d65e7e74a11de5378ae87f1e919
 O
 src/main/java/Model/Member.java,0\4\04a26749c1d553304386a9c6abfc4002609aa213
 U
@@ -58,3 +52,9 @@ k
 ;src/main/java/Controllers/EditMemberDialogueController.java,0\e\0e94ca132719790ee3c567d095ae5fdae1856453
 c
 3src/main/java/Controllers/MainWindowController.java,3\0\305b1fb740ed0fa9c8bfdd852f592bca86e360f8
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+i
+9src/main/java/Controllers/EditItemDialogueController.java,5\4\548757996f005d65e7e74a11de5378ae87f1e919
+h
+8src/main/java/com/exam/javaendassignment/AppLibrary.java,5\c\5cdaa2206ea9ed436ed00b9b5e9ce7fddd05ff50
