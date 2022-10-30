@@ -1,7 +1,7 @@
 
 a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ
 n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(€S
-i
-java:S2095r"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(Ρ΄ΗÒψÿÿÿÿ
 f
 java:S2095s"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(ÿχ†
+i
+java:S2095r"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(Ρ΄ΗÒψÿÿÿÿ
