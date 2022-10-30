@@ -140,7 +140,7 @@ public class MainWindowController implements Initializable {
     }
     @FXML
     private void onBtnEditItemClicked()  {
-        new SceneLoader().loadScene("EditLibraryItem",new EditItemDialogueController(collectionTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
+        new SceneLoader().loadScene("EditSelectedItem",new EditItemDialogueController(collectionTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
         collectionTableView.refresh(); // refreshing table view whenever it is updated in observable list
         collectionTableView.getSelectionModel().clearSelection();
     }
