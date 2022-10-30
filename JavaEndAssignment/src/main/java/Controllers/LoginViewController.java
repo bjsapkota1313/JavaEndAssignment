@@ -22,7 +22,6 @@ public class LoginViewController {
     @FXML
     public AnchorPane anchorPane;
     private  final Database database;
-
     private  final int SET_DIGIT_BIT = 0b100;
     private  final int SET_LETTER_BIT = 0b010;
     private  final int SET_SPECIAL_BIT = 0b001;

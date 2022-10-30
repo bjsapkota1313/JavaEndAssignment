@@ -1,4 +1,4 @@
 
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ü‚ùýúÿÿÿÿ
 [
-java:S1193,"@Replace the usage of the "instanceof" operator by a catch block.(‰ú¼Òøÿÿÿÿ
+java:S1193-"@Replace the usage of the "instanceof" operator by a catch block.(‰ú¼Òøÿÿÿÿ

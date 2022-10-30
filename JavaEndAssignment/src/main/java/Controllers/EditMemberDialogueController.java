@@ -32,12 +32,12 @@ public class EditMemberDialogueController implements Initializable {
     @FXML
     private void onBtnUpdateMemberClicked(ActionEvent event) {
         try{
-            selectedMember.setFirstName(getTextFieldText(txtFieldFirstName));
-            selectedMember.setLastName(getTextFieldText(txtFieldLastName));
             LocalDate dateOfBirth=dateOfBirthPicker.getValue() == null
                     ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                     : dateOfBirthPicker.getValue();
             selectedMember.setDateOfBirth(dateOfBirth);
+            selectedMember.setFirstName(getTextFieldText(txtFieldFirstName));
+            selectedMember.setLastName(getTextFieldText(txtFieldLastName));
             // closing the dialogue
             new StageCloser().closeStageByEvent(event);
         }

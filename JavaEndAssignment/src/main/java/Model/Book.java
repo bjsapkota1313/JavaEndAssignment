@@ -1,5 +1,4 @@
 package Model;
-
 public class Book extends LibraryItem{
     private final Author author;
 

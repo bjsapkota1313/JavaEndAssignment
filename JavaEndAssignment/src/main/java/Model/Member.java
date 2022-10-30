@@ -11,7 +11,6 @@ public class Member extends Person{
         this.identifier = identifier;
         this.dateOfBirth = dateOfBirth;
     }
-
     public int getIdentifier() {
         return identifier;
     }

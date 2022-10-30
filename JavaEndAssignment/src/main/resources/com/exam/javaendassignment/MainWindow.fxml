@@ -68,7 +68,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="1152.0" style="-fx-background-color: #E5E5E5;">
                   <children>
-                        <TableView fx:id="libraryItemTableView" layoutX="48.0" layoutY="66.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="459.0" prefWidth="1049.0" style="-fx-background-color: White;">
+                        <TableView fx:id="collectionTableView" layoutX="48.0" layoutY="66.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="459.0" prefWidth="1049.0" style="-fx-background-color: White;">
                           <columns>
                               <TableColumn prefWidth="128.3333078622818" text="Item Code">
                                   <cellValueFactory>

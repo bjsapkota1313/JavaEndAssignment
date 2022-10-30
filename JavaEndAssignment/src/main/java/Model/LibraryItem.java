@@ -6,7 +6,6 @@ public abstract class LibraryItem implements Serializable {
     private final int itemCode;
     private Availability availability ;
     private  String name ;
-
     public void setName(String name) {
         this.name = name;
     }
@@ -20,16 +19,13 @@ public abstract class LibraryItem implements Serializable {
     public void setAvailability(Availability availability) {
         this.availability = availability;
     }
-
-
     public int getItemCode() {
         return itemCode;
     }
 
     public Availability getAvailability() {
         return availability;
-    }
-
+    } // required this getter method to get availability in Tableview collections
 
     public String getName() {
         return name;

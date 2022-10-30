@@ -25,7 +25,7 @@ public class MainWindowController implements Initializable {
     private final Database database;
     private ObservableList<Member> members;
     @FXML
-    private TableView<Book> libraryItemTableView;
+    private TableView<Book> collectionTableView;
     @FXML
     private TableView<Member> membersTableView;
     @FXML
@@ -52,8 +52,8 @@ public class MainWindowController implements Initializable {
         tabPane.getSelectionModel().select(tabLending);// when app runs making default tab selection on Lending
         // book list
         bookList=FXCollections.observableList(database.getLibraryBooks());
-        libraryItemTableView.setItems(bookList);
-        libraryItemTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        collectionTableView.setItems(bookList);
+        collectionTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         // members
         members = FXCollections.observableList(database.getMembers());
@@ -74,7 +74,7 @@ public class MainWindowController implements Initializable {
             lblUserFeedBackLendingItem.getStyleClass().add("successMessageStyle");
             lblUserFeedBackLendingItem.setText("The " + lendingLibraryItem.getName() + " has been lent to " + lendingMember);
             database.updateLibraryItemAvailability(lendingLibraryItem.getItemCode(),Availability.No); // updating lending item availability status
-            libraryItemTableView.refresh();
+            collectionTableView.refresh();
         }catch (ResultNotFoundException | NumberFormatException | EmptyFieldException exp) {
             lblUserFeedBackLendingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
            if(exp instanceof NumberFormatException){
@@ -97,7 +97,7 @@ public class MainWindowController implements Initializable {
                 lblUserFeedBackReceivingItem.getStyleClass().add("successMessageStyle");
                 database.removeLentItem(receivingLentItem); // removing from LentItem list
                 database.updateLibraryItemAvailability(receivingLentItem.item().getItemCode(),Availability.Yes);
-                libraryItemTableView.refresh();
+                collectionTableView.refresh();
                 // updates the library item to available again
                 lblUserFeedBackReceivingItem.setText(receivingLentItem.item().getName() +" is available again to Lend");
             }
@@ -136,13 +136,13 @@ public class MainWindowController implements Initializable {
     @FXML
     private void  onBtnAddItemClicked()  {
         new SceneLoader().loadScene("AddLibraryItem",new AddItemDialogueController(bookList),new Stage(),true);
-        libraryItemTableView.getSelectionModel().clearSelection();
+        collectionTableView.getSelectionModel().clearSelection();
     }
     @FXML
     private void onBtnEditItemClicked()  {
-        new SceneLoader().loadScene("EditLibraryItem",new EditItemDialogueController(libraryItemTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
-        libraryItemTableView.refresh(); // refreshing table view whenever it is updated in observable list
-        libraryItemTableView.getSelectionModel().clearSelection();
+        new SceneLoader().loadScene("EditLibraryItem",new EditItemDialogueController(collectionTableView.getSelectionModel().getSelectedItem()),new Stage(),true);
+        collectionTableView.refresh(); // refreshing table view whenever it is updated in observable list
+        collectionTableView.getSelectionModel().clearSelection();
     }
     @FXML
     private void onBtnEditMemberClicked()  {
@@ -152,9 +152,9 @@ public class MainWindowController implements Initializable {
     }
     @FXML
     private void onBtnDeleteItemClicked() {
-        bookList.removeAll(libraryItemTableView.getSelectionModel().getSelectedItems());
-        libraryItemTableView.getSelectionModel().clearSelection();
-        libraryItemTableView.getSelectionModel().clearSelection(); // clearing selection
+        bookList.removeAll(collectionTableView.getSelectionModel().getSelectedItems());
+        collectionTableView.getSelectionModel().clearSelection();
+        collectionTableView.getSelectionModel().clearSelection(); // clearing selection
     }
     @FXML
     private void onBtnDeleteMemberClicked(){
@@ -163,8 +163,8 @@ public class MainWindowController implements Initializable {
     }
     private void disableButtons(){
         // preventing the null point expectation when user does not select in Tableview and try to Edit or Delete Item
-        btnDeleteItem.disableProperty().bind(Bindings.isEmpty(libraryItemTableView.getSelectionModel().getSelectedItems()));
-        btnEditItem.disableProperty().bind(Bindings.isEmpty(libraryItemTableView.getSelectionModel().getSelectedItems()));
+        btnDeleteItem.disableProperty().bind(Bindings.isEmpty(collectionTableView.getSelectionModel().getSelectedItems()));
+        btnEditItem.disableProperty().bind(Bindings.isEmpty(collectionTableView.getSelectionModel().getSelectedItems()));
         btnDeleteMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
         btnEditMember.disableProperty().bind(Bindings.isEmpty(membersTableView.getSelectionModel().getSelectedItems()));
     }
@@ -199,8 +199,8 @@ public class MainWindowController implements Initializable {
         //Sorting the filtered list
         SortedList<Book> sortedBooks = new SortedList<>(filteredBooks);
         // binding the sorted Books with table view
-        sortedBooks.comparatorProperty().bind(libraryItemTableView.comparatorProperty());
-        libraryItemTableView.setItems(sortedBooks);
+        sortedBooks.comparatorProperty().bind(collectionTableView.comparatorProperty());
+        collectionTableView.setItems(sortedBooks);
     }
     private String getTextFieldText(TextField textField){
         if(!textField.getText().isEmpty()){

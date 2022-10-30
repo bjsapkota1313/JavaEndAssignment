@@ -34,15 +34,16 @@ public class AddMemberDialogueController {
     @FXML
     private void onBtnAddMemberClicked(ActionEvent event){
         try{
-            members.add( new Member( dateOfBirthPicker.getValue() == null
+            LocalDate birthdate=dateOfBirthPicker.getValue() == null
                     ? LocalDate.parse(dateOfBirthPicker.getEditor().getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                    : dateOfBirthPicker.getValue()
-                   ,getTextFieldText(txtFieldFirstName),getTextFieldText(txtFieldFirstName),getHighestIdentifier()));
+                    : dateOfBirthPicker.getValue();
+
+            members.add( new Member( birthdate,getTextFieldText(txtFieldFirstName),getTextFieldText(txtFieldFirstName),getHighestIdentifier()));
             new StageCloser().closeStageByEvent(event);
         }
         catch(DateTimeParseException  | EmptyFieldException exp) {
             if(exp instanceof DateTimeParseException){
-                lblError.setText("Error Parsing " + dateOfBirthPicker.getEditor().getText() + "Into Date");
+                lblError.setText("Error Parsing " + dateOfBirthPicker.getEditor().getText() + " Into Date");
                 event.consume();
             } else {
                 lblError.setText(exp.getMessage());

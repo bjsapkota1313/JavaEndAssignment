@@ -1,6 +1,5 @@
 package Model;
 
-
 public class User extends Person{ // users are employees working library
    private final String userName;
    private final  String password;

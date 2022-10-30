@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class SceneLoader {
     public void loadScene(String name, Object controller,Stage window ,boolean isDialogBox) {
@@ -11,7 +12,7 @@ public class SceneLoader {
             FXMLLoader fxmlLoader = new FXMLLoader(AppLibrary.class.getResource(name+".fxml"));
             fxmlLoader.setController(controller);
             Scene scene = new Scene(fxmlLoader.load());
-            scene.getStylesheets().add(getClass().getResource("/css/AppStyles.css").toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/AppStyles.css")).toExternalForm());
             window.setTitle(name);
             window.setScene(scene);
             if(isDialogBox){
