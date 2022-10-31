@@ -153,7 +153,6 @@ public class MainWindowController implements Initializable {
     @FXML
     private void onBtnDeleteItemClicked() {
         bookList.removeAll(collectionTableView.getSelectionModel().getSelectedItems());
-        collectionTableView.getSelectionModel().clearSelection();
         collectionTableView.getSelectionModel().clearSelection(); // clearing selection
     }
     @FXML

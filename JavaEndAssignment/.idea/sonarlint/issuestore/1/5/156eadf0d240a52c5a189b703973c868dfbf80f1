@@ -1,13 +1,13 @@
 
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ü‚ùýúÿÿÿÿ
-r	java:S116"XRename this field "SET_DIGIT_BIT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘¼ó¨ÿÿÿÿÿ
-n	java:S116"YRename this field "SET_LETTER_BIT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÞ”©
-t	java:S116"ZRename this field "SET_SPECIAL_BIT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äêùèùÿÿÿÿ
+r	java:S116"XRename this field "SET_DIGIT_BIT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘¼ó¨ÿÿÿÿÿ
+n	java:S116"YRename this field "SET_LETTER_BIT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÞ”©
+t	java:S116"ZRename this field "SET_SPECIAL_BIT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äêùèùÿÿÿÿ
 <
-java:S1170"!Make this final field static too.(‘¼ó¨ÿÿÿÿÿ
+java:S1170"!Make this final field static too.(‘¼ó¨ÿÿÿÿÿ
 7
-java:S1170"!Make this final field static too.(ßÞ”©
+java:S1170"!Make this final field static too.(ßÞ”©
 <
-java:S1170"!Make this final field static too.(äêùèùÿÿÿÿ
+java:S1170"!Make this final field static too.(äêùèùÿÿÿÿ
 ‰
-java:S1130("lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(»¤±õ8Û²¢ÏÁ0
+java:S1130+"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(»¤±õ8Û²¢ÏÁ0

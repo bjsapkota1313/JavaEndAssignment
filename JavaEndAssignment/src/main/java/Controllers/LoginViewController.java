@@ -7,6 +7,7 @@ import Model.User;
 import com.exam.javaendassignment.CloserAndLoader.SceneLoader;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -15,8 +16,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginViewController {
+public class LoginViewController implements Initializable {
     @FXML
     public Label lblDisplayError;
     @FXML
@@ -79,4 +82,8 @@ public class LoginViewController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        btnLogin.setDefaultButton(true);
+    }
 }
