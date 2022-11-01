@@ -13,11 +13,18 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 
 public class MainWindowController implements Initializable {
@@ -33,11 +40,13 @@ public class MainWindowController implements Initializable {
     @FXML
     public TabPane tabPane;
     @FXML
+    private AnchorPane anchorPane;
+    @FXML
     public Tab tabLending;
     @FXML
-    private Button btnReceiveItem, btnLendItem,btnEditMember,btnDeleteMember,btnEditItem,btnDeleteItem;
+    private Button btnReceiveItem, btnLendItem,btnEditMember,btnDeleteMember,btnEditItem,btnDeleteItem,btnLateFinePay;
     @FXML
-    private Label lblUserName, lblUserFeedBackLendingItem,lblUserFeedBackReceivingItem;
+    private Label lblUserName, lblUserFeedBackLendingItem,lblUserFeedBackReceivingItem,lblTotalAmountToPay;
     @FXML
     private TextField txtFieldItemCode, txtFieldMemberId,  txtBoxReceiveItemCode;
     private final User currentLoggedUser;
@@ -73,7 +82,7 @@ public class MainWindowController implements Initializable {
             database.addLentItem(new LentItem(lendingLibraryItem, lendingMember, LocalDate.now()));
             lblUserFeedBackLendingItem.getStyleClass().add("successMessageStyle");
             lblUserFeedBackLendingItem.setText("The " + lendingLibraryItem.getName() + " has been lent to " + lendingMember);
-            database.updateLibraryItemAvailability(lendingLibraryItem.getItemCode(),Availability.No); // updating lending item availability status
+            database.updateLibraryItem(lendingLibraryItem.getItemCode(),Availability.No,LocalDate.now().plusWeeks(3)); // updating lending item availability status
             collectionTableView.refresh();
         }catch (ResultNotFoundException | NumberFormatException | EmptyFieldException exp) {
             lblUserFeedBackLendingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
@@ -88,15 +97,23 @@ public class MainWindowController implements Initializable {
     @FXML
     protected void onBtnReceiveItemClicked() {
         try {
+             final double LATE_FINE=0.10;
             LentItem receivingLentItem = database.getLentItemWithItemCode(Integer.parseInt( getTextFieldText(txtBoxReceiveItemCode)));
-            if (ChronoUnit.DAYS.between( receivingLentItem.lendingDate(),LocalDate.now())>=21 ){
+           // LocalDate test = LocalDate.of(2022,9,01);
+            if (DAYS.between(receivingLentItem.lendingDate(), LocalDate.now())>=21){
+                btnReceiveItem.disableProperty();
+                long lateDays=DAYS.between(receivingLentItem.lendingDate(), LocalDate.now())-21;
                 lblUserFeedBackReceivingItem.getStyleClass().add("errorMessageStyle");//changing text color to red
-                lblUserFeedBackReceivingItem.setText("This item is returned " + (ChronoUnit.DAYS.between( receivingLentItem.lendingDate(),LocalDate.now()) - 21) + " days Late");
+                lblUserFeedBackReceivingItem.setText("This item is returned " + (lateDays) + " days Late");
+                double lateAmount= lateDays*LATE_FINE;
+                lblTotalAmountToPay.setText(" Total Fine: €"+String.format("%.2f",lateAmount));
+                btnReceiveItem.disableProperty().set(true);
+                btnLateFinePay.visibleProperty().set(true);
                 // for now Not receiving a book whenever it later than 21 days  implementing fine can be adopted later on
             } else {
                 lblUserFeedBackReceivingItem.getStyleClass().add("successMessageStyle");
                 database.removeLentItem(receivingLentItem); // removing from LentItem list
-                database.updateLibraryItemAvailability(receivingLentItem.item().getItemCode(),Availability.Yes);
+                database.updateLibraryItem(receivingLentItem.item().getItemCode(),Availability.Yes,null);
                 collectionTableView.refresh();
                 // updates the library item to available again
                 lblUserFeedBackReceivingItem.setText(receivingLentItem.item().getName() +" is available again to Lend");
@@ -110,6 +127,14 @@ public class MainWindowController implements Initializable {
                 lblUserFeedBackReceivingItem.setText(exp.getMessage());
             }
         }
+    }
+    @FXML
+    private void onBtnLateFinePayClicked(){
+        lblUserFeedBackReceivingItem.getStyleClass().clear();
+        btnReceiveItem.disableProperty().set(false);
+        btnLateFinePay.visibleProperty().set(false);
+        lblUserFeedBackReceivingItem.setText("");
+        lblTotalAmountToPay.setText("");
     }
 
     @FXML
@@ -127,6 +152,9 @@ public class MainWindowController implements Initializable {
     public void onReceiveItemCodeChange(StringProperty observable, String oldValue, String newValue) {
         lblUserFeedBackReceivingItem.getStyleClass().clear();
         lblUserFeedBackReceivingItem.setText("");
+        btnReceiveItem.disableProperty().set(false);
+        lblTotalAmountToPay.setText("");
+        btnLateFinePay.visibleProperty().set(false);
     }
     @FXML
     private void onBtnAddAddMemberClicked() {
@@ -206,5 +234,15 @@ public class MainWindowController implements Initializable {
             return textField.getText();
         }
         throw new EmptyFieldException(textField.getPromptText() + " cannot be empty");
+    }
+    @FXML
+    private void onBtnImportItemFromFileClicked(){
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog((Stage) anchorPane.getScene().getWindow());
+        List<Book> books =database.readBooksFromFile(selectedFile);
+        if (books!=null){
+            database.addReadBooksFromFile(books);
+        }
+        collectionTableView.refresh();
     }
 }

@@ -58,7 +58,7 @@ public class AppLibrary extends Application {
         if (lentItemsFile.exists()){
             database.setLentItemsFromSerializedFile(lentItemsFile);
         }
-        // no files will be lent ad default
+        // no files will be lent as default
 
     }
 

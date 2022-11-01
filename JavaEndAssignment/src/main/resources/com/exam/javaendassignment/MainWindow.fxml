@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="586.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" prefHeight="586.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="-6.0" layoutY="-1.0" prefHeight="96.0" prefWidth="1144.0" style="-fx-background-color: black;">
          <children>
@@ -90,6 +90,11 @@
                                       <PropertyValueFactory property="author" />
                                   </cellValueFactory>
                               </TableColumn>
+                              <TableColumn prefWidth="129.0" text="Expected Return Date">
+                                  <cellValueFactory>
+                                      <PropertyValueFactory property="expectedReturnDate" />
+                                  </cellValueFactory>
+                              </TableColumn>
                           </columns>
                         </TableView>
                         <Label layoutX="983.0" layoutY="22.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="114.0" text="Items" textFill="#a5a5a5">
@@ -101,6 +106,7 @@
                         <Button fx:id="btnEditItem" layoutX="866.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnEditItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="steelWhiteButton" text="Edit item" />
                         <Button fx:id="btnDeleteItem" layoutX="744.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBtnDeleteItemClicked" prefHeight="32.0" prefWidth="107.0" styleClass="redWhiteButton" text="Delete item" />
                       <TextField alignment="CENTER_RIGHT" layoutX="31.0" layoutY="14.0" onTextChange="#onSearchItemTxtFieldChange" prefHeight="25.0" prefWidth="301.0" promptText="Search Library Items" />
+                        <Button styleClass="steelWhiteButton" layoutX="78.0" layoutY="539.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Import From File" onAction="#onBtnImportItemFromFileClicked" />
                   </children></AnchorPane>
             </content>
           </Tab>
@@ -120,7 +126,7 @@
                                     <TextField fx:id="txtFieldItemCode" layoutX="91.0" layoutY="72.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onItemCodeChange" prefHeight="25.0" prefWidth="327.0" promptText="Item code" />
                                     <TextField fx:id="txtFieldMemberId" layoutX="93.0" layoutY="123.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onMemberIDChange" prefHeight="25.0" prefWidth="326.0" promptText="Member Identifier" />
                                     <Button fx:id="btnLendItem" layoutX="301.0" layoutY="166.0" mnemonicParsing="false" onAction="#onBtnLendItemClicked" prefHeight="25.0" prefWidth="118.0" styleClass="blueWhiteButton" text="Lend Item" />
-                                    <Label fx:id="lblUserFeedBackLendingItem" styleClass="errorMessageStyle" layoutX="39.0" layoutY="216.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="394.0">
+                                    <Label fx:id="lblUserFeedBackLendingItem" layoutX="39.0" layoutY="216.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="394.0" styleClass="errorMessageStyle">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -132,6 +138,12 @@
                                     <TextField fx:id="txtBoxReceiveItemCode" layoutX="54.0" layoutY="58.0" nodeOrientation="LEFT_TO_RIGHT" onTextChange="#onReceiveItemCodeChange" prefHeight="25.0" prefWidth="447.0" promptText="Item Code" />
                                     <Button fx:id="btnReceiveItem" layoutX="374.0" layoutY="102.0" mnemonicParsing="false" onAction="#onBtnReceiveItemClicked" prefHeight="25.0" prefWidth="126.0" styleClass="blueWhiteButton" text="Receive item" />
                                     <Label fx:id="lblUserFeedBackReceivingItem" layoutX="55.0" layoutY="153.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="445.0" />
+                                    <Button fx:id="btnLateFinePay" layoutX="375.0" layoutY="239.0" mnemonicParsing="false" onAction="#onBtnLateFinePayClicked" prefHeight="26.0" prefWidth="127.0" styleClass="blueWhiteButton" text="Pay" visible="false" />
+                                    <Label fx:id="lblTotalAmountToPay" layoutX="60.0" layoutY="203.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="444.0">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                            </children>

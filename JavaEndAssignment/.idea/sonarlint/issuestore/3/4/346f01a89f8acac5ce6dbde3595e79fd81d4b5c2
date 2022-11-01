@@ -1,7 +1,12 @@
 
-a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+a	java:S112…"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+a	java:S112§"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
 n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜€S
-f
-java:S2095s"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(ÿ˜÷†
 i
-java:S2095r"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(Ñ´ÇÒøÿÿÿÿ
+java:S2095v"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(Ñ´ÇÒøÿÿÿÿ
+f
+java:S2095w"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(ÿ˜÷†
+M
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ
+G
+java:S1128"1Remove this unused import 'java.util.Comparator'.(î¹ó¹

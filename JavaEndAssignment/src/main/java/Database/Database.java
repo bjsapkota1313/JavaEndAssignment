@@ -4,8 +4,12 @@ import Model.*;
 import Model.Exception.ResultNotFoundException;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Database {
@@ -133,12 +137,34 @@ public class Database {
     public List<LentItem> getLentItems(){
         return lentItems;
     }
-    public void updateLibraryItemAvailability(int itemCode,Availability availability){
+    public void updateLibraryItem(int itemCode,Availability availability,LocalDate date){
         for (LibraryItem item :books
              ) {
             if(item.getItemCode() == itemCode){
                 item.setAvailability(availability);
+                item.setExpectedReturnDate(date);
             }
         }
     }
-}
+    public void addReadBooksFromFile(List<Book> books){
+        for (Book book : books
+             ) {
+            books.add(book);
+
+        }
+
+    }
+
+    public List<Book> readBooksFromFile(File file){
+        List<Book> list = new ArrayList<>();
+        try {
+            Files.readAllLines(Paths.get(file.getPath()))
+                    .forEach(line -> list.add(new Book(line.split(";")[1], Integer.parseInt(line.split(";")[0]), Availability.No, new Author(line.split(";")[2], ""))));
+
+
+        }
+     catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }}
